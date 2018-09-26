@@ -5,5 +5,5 @@ gemspec
 gem 'rails'
 
 group :development do
-  gem 'pry-rails'
+  # gem 'pry-rails'
 end
