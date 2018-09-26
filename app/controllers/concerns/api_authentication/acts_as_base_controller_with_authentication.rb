@@ -1,4 +1,4 @@
-module ApiAuthentication::ActsAsControllerWithAuthentication
+module ApiAuthentication::ActsAsBaseControllerWithAuthentication
   extend ActiveSupport::Concern
 
   require 'jwt'
