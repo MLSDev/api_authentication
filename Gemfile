@@ -3,4 +3,7 @@ source 'http://rubygems.org'
 gemspec
 
 gem 'rails'
-gem 'pry-rails'
+
+group :development do
+  gem 'pry-rails'
+end
