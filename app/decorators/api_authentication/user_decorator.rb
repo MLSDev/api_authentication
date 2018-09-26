@@ -2,8 +2,12 @@ class ApiAuthentication::UserDecorator < ( defined?(::UserDecorator) ? ::UserDec
   delegate_all
 
   def as_json *args
-    {
-      id: id
-    }
+    if defined?(::UserDecorator)
+      super
+    else
+      {
+        id: id
+      }
+    end
   end
 end
