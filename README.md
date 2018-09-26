@@ -1,0 +1,67 @@
+# ApiAuthentication
+
+ApiAuthentication.
+
+Only Rails `> 5` support.
+
+## Installation
+
+Add these gems to your Gemfile
+
+``` ruby
+gem 'api_authentication'
+
+gem 'geocoder'
+
+gem 'paperclip'
+```
+
+Install ImageMagic
+
+```brew install imagemagick```
+
+...and run `bundle install` to install the gems.
+
+Next, run:
+
+``` bash
+# add an initializer to config/initializers with all of the configuration options
+rails g api_authentication:install
+
+# This will add the necessary migrations to your app's db/migrate directory
+rails g api_authentication:migrations
+
+# This will run any pending migrations
+rails db:migrate
+```
+
+then add to `.env` file `JWT_HMAC_SECRET` variable and assign some value to it
+
+then add the following to your routes.rb file:
+
+``` bash
+# config/routes.rb
+mount ApiAuthentication::Engine => '/api'
+
+# or inside api namespace
+
+namespace :api do
+  mount ApiAuthentication::Engine => '/'
+end
+```
+
+It will generate routes like
+
+```
+Routes for ApiAuthentication::Engine:
+session          PATCH  /session
+                 PUT    /session
+                 POST   /session
+                 DELETE /session
+facebook_session POST   /facebook/session
+```
+
+
+
+
+

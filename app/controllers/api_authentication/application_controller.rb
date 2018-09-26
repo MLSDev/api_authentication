@@ -1,0 +1,2 @@
+class ApiAuthentication::ApplicationController < ApiAuthentication.configuration.controller_to_inherit_from.constantize
+end
