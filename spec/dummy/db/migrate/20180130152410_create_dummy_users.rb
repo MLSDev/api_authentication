@@ -1,4 +1,4 @@
-class CreateUsers < ActiveRecord::Migration[5.1]
+class CreateDummyUsers < ActiveRecord::Migration[5.1]
   def change
     create_table ApiAuthentication.configuration.users_table_name do |t|
       t.string :first_name if ApiAuthentication.configuration.add_first_name_field
