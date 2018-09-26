@@ -1,1 +1,1 @@
-resource.to_json
+resource.decorate.to_json
