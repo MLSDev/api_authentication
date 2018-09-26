@@ -73,7 +73,7 @@ class ApiAuthentication::Session < ApiAuthentication::ApplicationRecord
   def generate_unique_secure_token
     return unless user_id
 
-    self.token ||= JWT.encode(
+    self.token ||= ::JWT.encode(
       {
         user: {
           id:               user_id,
