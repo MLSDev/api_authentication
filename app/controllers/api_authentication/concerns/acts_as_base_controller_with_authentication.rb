@@ -19,21 +19,32 @@ module ApiAuthentication::ActsAsControllerWithAuthentication
 
   def authenticate!
     authenticate_or_request_with_http_token do |token,|
-      begin
-        @current_token    = token
+      decode_jwt_hash_by token
+    end
+  end
 
-        #
-        # STRUCTURE: { user: { id: XXX, created_at: 'XXX' } }
-        #
-        @current_jwt_hash = ::JWT.decode(token, ENV['JWT_HMAC_SECRET'], true, { algorithm: 'HS256' })
-                               .detect { |hash| hash.key?('user') }
-                               .deep_symbolize_keys
+  def authenticate
+    authenticate_with_http_token do |token,|
+      decode_jwt_hash_by token
+    end
+  end
 
-        @current_user_id  = current_jwt_hash[:user][:id]
+  def decode_jwt_hash_by token
+    begin
+      @current_token    = token
 
-      rescue JWT::DecodeError
-        false
-      end
+      #
+      # STRUCTURE: { user: { id: XXX, created_at: 'XXX' } }
+      #
+      @current_jwt_hash = ::JWT.decode(token, ENV['JWT_HMAC_SECRET'], true, { algorithm: 'HS256' })
+                             .detect { |hash| hash.key?('user') }
+                             .deep_symbolize_keys
+
+      @current_user_id  = current_jwt_hash[:user][:id]
+
+      return true
+    rescue JWT::DecodeError
+      return false
     end
   end
 
