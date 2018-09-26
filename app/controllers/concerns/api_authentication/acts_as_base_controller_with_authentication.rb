@@ -49,7 +49,7 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
   end
 
   def current_user
-    @current_user ||= User.find current_user_id
+    @current_user ||= ::User.find current_user_id
   end
 
   def current_session
