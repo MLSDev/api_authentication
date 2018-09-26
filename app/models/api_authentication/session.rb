@@ -1,4 +1,6 @@
 class ApiAuthentication::Session < ApiAuthentication::ApplicationRecord
+  require 'jwt'
+
   self.table_name = 'api_authentication_sessions'
 
   attribute :email
