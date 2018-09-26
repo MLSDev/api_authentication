@@ -1,4 +1,4 @@
-# These configuration options can be used to customise the behaviour of ApiSessionRecovering
+# These configuration options can be used to customise the behaviour of ApiAuthentication
 ApiAuthentication.configure do |config|
     #
     # => Controller that should be inherited by engine ApplicationController, default is 'ActionController::Base'

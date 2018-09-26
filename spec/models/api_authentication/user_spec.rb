@@ -10,6 +10,6 @@ describe ApiAuthentication::User do
   it { should have_one :latest_session }
 
   describe '.table_name with default config' do
-    it { expect(described_class.table_name).to eq ApiSessionRecovering.configuration.users_table_name }
+    it { expect(described_class.table_name).to eq ApiAuthentication.configuration.users_table_name }
   end
 end

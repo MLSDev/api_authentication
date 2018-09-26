@@ -1,6 +1,6 @@
 namespace :dummy do
 
-  desc "Sets up the dummy application to the point just before ApiSessionRecovering will be installed"
+  desc "Sets up the dummy application to the point just before ApiAuthentication will be installed"
   task :setup do
     # If Rails version is 3, use the old rake tasks.
     # If Rails version is 4, use the new rake tasks.
@@ -12,8 +12,8 @@ namespace :dummy do
   desc "Cleans the dummy application so we can test the installation again"
   task :clean do
     remove_joined_file("db", "migrate", "*.acts_as_taggable_on_engine*.rb")
-    remove_joined_file("db", "migrate", "*.ApiSessionRecovering*.rb")
-    remove_joined_file("config", "initializers", "ApiSessionRecovering.rb")
+    remove_joined_file("db", "migrate", "*.api_authentication*.rb")
+    remove_joined_file("config", "initializers", "api_authentication.rb")
     remove_joined_file("db", "schema.rb")
   end
 

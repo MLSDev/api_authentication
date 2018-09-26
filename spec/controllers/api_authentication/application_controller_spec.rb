@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-describe ApiSessionRecovering::ApplicationController do
-  it { should be_a ActionController::Base }
+describe ApiAuthentication::ApplicationController do
+  xit { should be_a ActionController::Base }
 end
