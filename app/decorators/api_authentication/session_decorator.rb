@@ -1,4 +1,4 @@
-class ApiAuthentication::SessionDecorator < Draper::Decorator
+class ApiAuthentication::SessionDecorator  < ( defined?(::SessionDecorator) ? ::SessionDecorator : Draper::Decorator )
   delegate_all
 
   decorates_association :user
