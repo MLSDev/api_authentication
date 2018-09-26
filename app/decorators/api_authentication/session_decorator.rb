@@ -4,9 +4,13 @@ class ApiAuthentication::SessionDecorator  < ( defined?(::SessionDecorator) ? ::
   decorates_association :user
 
   def as_json *args
-    {
-      token: token,
-      user:  user
-    }
+    if defined?(::UserDecorator)
+      super
+    else
+      {
+        token: token,
+        user:  user
+      }
+    end
   end
 end
