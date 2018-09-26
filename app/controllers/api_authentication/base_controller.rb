@@ -47,7 +47,7 @@ class ApiAuthentication::BaseController < ApiAuthentication::ApplicationControll
         @current_token    = token
 
         #
-        # STRUCTURE: { user: { id: XXX, created_at: 'XXX', token_randomizer: 'XXX' } }
+        # STRUCTURE: { user: { id: XXX, created_at: 'XXX' } }
         #
         @current_jwt_hash = JWT.decode(token, ENV['JWT_HMAC_SECRET'], true, { algorithm: 'HS256' })
                                .detect { |hash| hash.key?('user') }

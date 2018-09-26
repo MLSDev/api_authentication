@@ -79,8 +79,7 @@ class ApiAuthentication::Session < ApiAuthentication::ApplicationRecord
       {
         user: {
           id:               user_id,
-          created_at:       Time.now.utc.iso8601,
-          token_randomizer: SecureRandom.uuid
+          created_at:       Time.now.utc.iso8601(3)
         }
       },
       ENV['JWT_HMAC_SECRET'],
