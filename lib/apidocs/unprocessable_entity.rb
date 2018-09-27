@@ -2,6 +2,8 @@
 
 module ApiAuthentication
   class UnprocessableEntity
+    require 'swagger/blocks'
+
     include Swagger::Blocks
 
     swagger_schema :UnprocessableEntity do
