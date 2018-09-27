@@ -1,4 +1,4 @@
 module ApiAuthentication
   require 'swagger/blocks'
-  require 'apidocs/session'
+  require 'apidocs/session_docs'
 end
