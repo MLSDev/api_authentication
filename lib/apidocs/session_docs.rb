@@ -5,12 +5,9 @@ class ApiAuthentication::SessionDocs
   swagger_path '/session' do
     operation :post do
       key :description, 'session'
-      key :summary, 'session'
-      key :tags, ['Create new session']
+      key :summary, 'create session'
+      key :tags, ['session']
       key :consumes, ['multipart/form-data']
-      # security do
-      #   key :api_key, []
-      # end
       parameter do
         key :name, 'session[email]'
         key :in, :formData
@@ -32,6 +29,28 @@ class ApiAuthentication::SessionDocs
         schema do
           key :'$ref', :UnprocessableEntity
         end
+      end
+    end
+  end
+
+  swagger_path '/session' do
+    operation :delete do
+      key :description, 'session'
+      key :summary, 'delete session'
+      key :tags, ['session']
+      key :consumes, ['multipart/form-data']
+      parameter do
+        key :name, 'Authorization'
+        key :in, :header
+        key :default, 'Token token="ACCESS_TOKEN"'
+        key :required, true
+        key :type, :string
+      end
+      response '201' do
+        key :description, 'Session'
+      end
+      response '401' do
+        key :description, 'NotAuthorize'
       end
     end
   end
