@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Comming soon [@DmytroStepaniuk](https://github.com/DmytroStepaniuk).
 
+
+## [0.0.8] - 2018-09-27
+### Added
+- Ability to setup custom class name for user model
+
 ## [0.0.7] - 2018-09-27
 ### Added
 - Swagger classes
