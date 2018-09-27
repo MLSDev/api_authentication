@@ -61,6 +61,22 @@ session          PATCH  /session
 facebook_session POST   /facebook/session
 ```
 
+### SWAGGER
+
+Add in SWAGGERED_CLASSES array in api docs controller of project (if swagger gem is used in project)
+
+`ApiAuthentication::SWAGGER_CLASSES`
+
+And call on array `flatten` method like this
+
+```
+SWAGGERED_CLASSES = [
+    SomeClass,
+    ApiAuthentication::SWAGGER_CLASSES,
+  ].flatten.freeze
+```
+
+
 
 
 
