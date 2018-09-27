@@ -8,9 +8,9 @@ module ApiAuthentication
   # autoload :EmailValidator, 'email_validator'
 
   SWAGGER_CLASSES = [
-    # SessionDocs,
-    # UnprocessableEntity
-  ]
+    SessionDocs,
+    UnprocessableEntity
+  ] rescue []
 
   def self.configure(&block)
     block.call configuration
