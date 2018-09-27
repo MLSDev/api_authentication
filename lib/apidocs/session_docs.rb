@@ -62,19 +62,20 @@ module ApiAuthentication
     end
 
     swagger_schema :OutputSession do
-      property :user do
-        key :'$ref', :OutputProfile
-      end
       property :token do
         key :type, :string
+      end
+      property :user do
+        key :'$ref', :OutputProfile
       end
     end
 
     swagger_schema :OutputProfile do
       key :required, [:id]
       property :id do
-        key :type, :integer
-        key :format, :int64
+        key :type, :string
+        key :description, 'See Profile model'
+        key :default, 'See Profile model'
       end
     end
   end
