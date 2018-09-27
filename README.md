@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/MLSDev/api_authentication.svg?branch=master)](https://travis-ci.org/MLSDev/api_authentication)
+
 # ApiAuthentication
 
 ApiAuthentication.
