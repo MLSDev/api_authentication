@@ -6,6 +6,8 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
   included do
     before_action :authenticate!
 
+    before_action :check_base_policy
+
     helper_method :current_user
 
     helper_method :current_session
@@ -55,5 +57,13 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
 
   def current_session
     @current_session ||= ::ApiAuthentication::Session.find_by_token! current_token
+  end
+
+  def base_policy
+    true
+  end
+
+  def check_base_policy
+    head :forbidden unless base_policy
   end
 end
