@@ -1,7 +1,7 @@
 module ApiAuthentication
   class SessionDocs
     require 'swagger/blocks'
-    require 'unprocessable_entity'
+    require 'apidocs/unprocessable_entity'
 
     include Swagger::Blocks
 
