@@ -36,5 +36,11 @@ module ApiAuthentication
 
     config_accessor(:include_facebook_login) { true }
 
+    #
+    # => allow to set up in-app class name of user model
+    #
+
+    config_accessor(:app_user_model_class_name) { 'User' }
+
   end
 end

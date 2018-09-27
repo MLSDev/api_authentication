@@ -1,8 +1,6 @@
 class ApiAuthentication::BaseController < ApiAuthentication::ApplicationController
   include ApiAuthentication::ActsAsBaseControllerWithAuthentication
 
-  protect_from_forgery with: :exception, unless: -> { request.format.json? }
-
   helper_method :collection, :resource, :parent
 
   rescue_from ActionController::ParameterMissing do |exception|
@@ -26,7 +24,7 @@ class ApiAuthentication::BaseController < ApiAuthentication::ApplicationControll
   end
 
   def update
-    resource.update!(resource_params)
+    resource.update! resource_params
   end
 
   def destroy
