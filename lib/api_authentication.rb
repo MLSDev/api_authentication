@@ -7,7 +7,7 @@ require 'email_validator'
 module ApiAuthentication
   autoload :EmailValidator, 'email_validator'
 
-  SWAGGER_CLASSES = [
+  API_AUTHENTICATION_SWAGGER_CLASSES = [
     ::ApiAuthentication::SessionDocs,
     ::ApiAuthentication::UnprocessableEntity
   ]
