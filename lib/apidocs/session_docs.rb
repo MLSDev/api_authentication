@@ -26,6 +26,9 @@ module ApiAuthentication
         end
         response '201' do
           key :description, 'Session'
+          schema do
+            key :'$ref', :OutputSession
+          end
         end
         response '422' do
           key :description, 'UnprocessableEntity'
@@ -55,6 +58,23 @@ module ApiAuthentication
         response '401' do
           key :description, 'NotAuthorize'
         end
+      end
+    end
+
+    swagger_schema :OutputSession do
+      property :user do
+        key :'$ref', :OutputProfile
+      end
+      property :token do
+        key :type, :string
+      end
+    end
+
+    swagger_schema :OutputProfile do
+      key :required, [:id]
+      property :id do
+        key :type, :integer
+        key :format, :int64
       end
     end
   end
