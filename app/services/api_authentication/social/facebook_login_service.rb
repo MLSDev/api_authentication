@@ -23,7 +23,7 @@ class ApiAuthentication::Social::FacebookLoginService
       user.birthday = response['birthday'] if ApiAuthentication.configuration.pull_variables_from_facebook.include?("birthday")
     end
 
-    binding.pry
+    # binding.pry
 
     @user
   end
@@ -51,7 +51,7 @@ class ApiAuthentication::Social::FacebookLoginService
   private
 
   def response
-    binding.pry
+    # binding.pry
     @response ||= JSON.parse(Net::HTTP.get(url))
   rescue
     nil
