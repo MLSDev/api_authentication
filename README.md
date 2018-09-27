@@ -37,6 +37,12 @@ rails g api_authentication:migrations
 rails db:migrate
 ```
 
+Include module to Your `BaseController`:
+
+```ruby
+include ApiAuthentication::ActsAsBaseControllerWithAuthentication
+```
+
 then add to `.env` file `JWT_HMAC_SECRET` variable and assign some value to it
 
 then add the following to your routes.rb file:
