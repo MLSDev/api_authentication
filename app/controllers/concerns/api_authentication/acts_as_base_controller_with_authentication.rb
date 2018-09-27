@@ -6,7 +6,6 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
   included do
     class ::ApiAuthentication::UserDecorator < ::UserDecorator; end
 
-
     before_action :authenticate!
 
     before_action :check_base_policy
