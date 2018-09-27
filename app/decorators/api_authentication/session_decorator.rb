@@ -1,11 +1,11 @@
-class ApiAuthentication::SessionDecorator  < ( defined?(::SessionDecorator) ? ::SessionDecorator : Draper::Decorator )
+class ApiAuthentication::SessionDecorator < Draper::Decorator
   delegate_all
 
   decorates_association :user
 
   def as_json *args
     if defined?(::SessionDecorator)
-      super
+      ::SessionDecorator.decorate(model, context: context).as_json
     else
       {
         token: token,
