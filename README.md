@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/MLSDev/api_authentication.svg?branch=master)](https://travis-ci.org/MLSDev/api_authentication)
+
 # ApiAuthentication
 
 ApiAuthentication.
@@ -60,6 +62,34 @@ session          PATCH  /session
                  DELETE /session
 facebook_session POST   /facebook/session
 ```
+
+### SWAGGER
+
+Add in SWAGGERED_CLASSES array in api docs controller of project (if swagger gem is used in project)
+
+`ApiAuthentication::SWAGGER_CLASSES`
+
+And call on array `flatten` method like this
+
+```
+SWAGGERED_CLASSES = [
+    SomeClass,
+    ApiAuthentication::SWAGGER_CLASSES,
+  ].flatten.freeze
+```
+
+## About MLSDev
+
+![MLSdev][logo]
+
+The repo is maintained by MLSDev, Inc. We specialize in providing all-in-one solution in mobile and web development. Our team follows Lean principles and works according to agile methodologies to deliver the best results reducing the budget for development and its timeline.
+
+Find out more [here][mlsdev] and don't hesitate to [contact us][contact]!
+
+[mlsdev]:  https://mlsdev.com
+[contact]: https://mlsdev.com/contact_us
+[logo]:    https://raw.githubusercontent.com/MLSDev/development-standards/master/mlsdev-logo.png "Mlsdev"
+
 
 
 
