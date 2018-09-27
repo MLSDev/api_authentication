@@ -4,7 +4,9 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
   require 'jwt'
 
   included do
-    class ::ApiAuthentication::UserDecorator < ::UserDecorator; end
+    if defined?("::#{ ApiAuthentication.configuration.app_user_model_class_name.constantize }Decorator".constantize)
+      class ::ApiAuthentication::UserDecorator < "::#{ ApiAuthentication.configuration.app_user_model_class_name.constantize }Decorator".constantize; end
+    end
 
     before_action :authenticate!
 
