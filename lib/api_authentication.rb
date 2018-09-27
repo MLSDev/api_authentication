@@ -7,6 +7,9 @@ require 'apidocs'
 module ApiAuthentication
   # autoload :EmailValidator, 'email_validator'
 
+  autoload :SessionDocs
+  autoload :UnprocessableEntity
+
   SWAGGER_CLASSES = [
     SessionDocs,
     UnprocessableEntity
