@@ -2,7 +2,7 @@ class ApiAuthentication::SessionDocs
   require 'apidocs/unprocessable_entity'
   include Swagger::Blocks
 
-  swagger_path '/api/session' do
+  swagger_path '/session' do
     operation :post do
       key :description, 'session'
       key :summary, 'session'
