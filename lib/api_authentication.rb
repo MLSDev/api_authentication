@@ -1,5 +1,6 @@
 require 'api_authentication/configuration'
 require 'api_authentication/engine'
+require_relative './apidocs'
 require 'apidocs'
 # require 'validators'
 require 'email_validator'
