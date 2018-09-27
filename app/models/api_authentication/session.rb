@@ -75,11 +75,13 @@ class ApiAuthentication::Session < ApiAuthentication::ApplicationRecord
   def generate_unique_secure_token
     return unless user_id
 
+    raise 'JWT_HMAC_SECRET is missing in env' unless Rails.env.test?
+
     self.token ||= ::JWT.encode(
       {
         user: {
-          id:               user_id,
-          created_at:       Time.now.utc.iso8601(3)
+          id:         user_id,
+          created_at: Time.now.utc.iso8601(3)
         }
       },
       ENV['JWT_HMAC_SECRET'],

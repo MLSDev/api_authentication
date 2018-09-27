@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Comming soon [@DmytroStepaniuk](https://github.com/DmytroStepaniuk).
 
+## [0.0.10] - 2018-09-27
+### Added
+- Raise error if JWT_HMAC_SECRET is missing in non-test env
+
 
 ## [0.0.8] - 2018-09-27
 ### Added
