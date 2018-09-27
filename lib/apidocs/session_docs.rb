@@ -27,7 +27,7 @@ module ApiAuthentication
         response '201' do
           key :description, 'Session'
           schema do
-            key :'$ref', :OutputSession
+            key :'$ref', :ApiAuthenticationOutputSession
           end
         end
         response '422' do
@@ -61,21 +61,21 @@ module ApiAuthentication
       end
     end
 
-    swagger_schema :OutputSession do
+    swagger_schema :ApiAuthenticationOutputSession do
       property :token do
         key :type, :string
       end
       property :user do
-        key :'$ref', :OutputProfile
+        key :'$ref', :ApiAuthenticationOutputProfile
       end
     end
 
-    swagger_schema :OutputProfile do
+    swagger_schema :ApiAuthenticationOutputProfile do
       key :required, [:id]
       property :id do
         key :type, :string
-        key :description, 'See Profile model'
-        key :default, 'See Profile model'
+        key :description, 'See Profile model for GET /profile'
+        key :default, 'See Profile model for GET /profile'
       end
     end
   end
