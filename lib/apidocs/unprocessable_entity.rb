@@ -4,12 +4,6 @@ class ApiAuthentication::UnprocessableEntity
   include Swagger::Blocks
 
   swagger_schema :UnprocessableEntity do
-    schema do
-      key :'$ref', :OutputUnprocessableEntity
-    end
-  end
-
-  swagger_schema :OutputUnprocessableEntity do
     property :errors do
       key :'$ref', :OutputErrors
     end
