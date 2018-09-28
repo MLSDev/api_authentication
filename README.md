@@ -11,7 +11,7 @@ Only Rails `> 5` support.
 Add these gems to your Gemfile
 
 ``` ruby
-gem 'api_authentication'
+gem 'api_authentication', github: 'MLSDev', tag: 'LATEST_VERSION'
 
 gem 'geocoder'
 
