@@ -1,7 +1,3 @@
 module ApiAuthentication
-  # require 'validators/reset_password_attempts_validation'
-
-  # require 'validators/restore_password_attempts_validation'
-
-  # require 'validators/reset_password_validations_attempts'
+  # require 'validators/your_validator_could_be_here'
 end

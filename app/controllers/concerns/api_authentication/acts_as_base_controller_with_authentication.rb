@@ -5,7 +5,9 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
 
   included do
     if defined?("::#{ ApiAuthentication.configuration.app_user_model_class_name.constantize }Decorator".constantize)
-      class ::ApiAuthentication::UserDecorator < "::#{ ApiAuthentication.configuration.app_user_model_class_name.constantize }Decorator".constantize; end
+      unless defined?(::ApiAuthentication::UserDecorator)
+        class ::ApiAuthentication::UserDecorator < "::#{ ApiAuthentication.configuration.app_user_model_class_name.constantize }Decorator".constantize; end
+      end
     end
 
     before_action :authenticate!
