@@ -23,7 +23,7 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
 
         def user
           if defined?("::#{ ApiAuthentication.configuration.app_user_model_class_name }".constantize)
-            "::#{ ApiAuthentication.configuration.app_user_model_class_name }".constantize.find(model.user.id).decorate(context: context).model.class
+            "::#{ ApiAuthentication.configuration.app_user_model_class_name }".constantize.find(model.user.id).decorate(context: context).model.class.to_s
           else
             super
           end
