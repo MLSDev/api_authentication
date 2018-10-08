@@ -27,8 +27,6 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
           else
             super
           end
-        rescue
-          super
         end
       end
     end
