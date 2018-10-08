@@ -22,11 +22,12 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
         end
 
         def user
-          if defined?("::#{ ApiAuthentication.configuration.app_user_model_class_name }".constantize)
-            "::#{ ApiAuthentication.configuration.app_user_model_class_name }".constantize.find(model.user.id).decorate(context: context).model.class.to_s
-          else
-            super
-          end
+          "::#{ ApiAuthentication.configuration.app_user_model_class_name }".constantize.find(model.user.id).decorate context: context
+        rescue
+          #
+          # NOTE: case when UserDecorator is not loaded yet - will be use the decorator from the engine
+          #
+          super
         end
       end
     end
