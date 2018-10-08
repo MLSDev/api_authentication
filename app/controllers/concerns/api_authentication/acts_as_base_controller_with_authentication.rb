@@ -22,6 +22,10 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
         end
 
         def user
+          decorator = "::#{ ApiAuthentication.configuration.app_user_model_class_name }".constantize.find(model.user.id).decorate context: context
+
+          Rails.logger.info decorator.model.class
+
           if defined?("::#{ ApiAuthentication.configuration.app_user_model_class_name }".constantize)
             "::#{ ApiAuthentication.configuration.app_user_model_class_name }".constantize.find(model.user.id).decorate context: context
           else
