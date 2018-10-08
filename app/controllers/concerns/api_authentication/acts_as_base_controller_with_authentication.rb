@@ -10,6 +10,23 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
       end
     end
 
+    unless defined?(::ApiAuthentication::SessionDecorator)
+      class ApiAuthentication::SessionDecorator < Draper::Decorator
+        delegate_all
+
+        def as_json *args
+          {
+            token: token,
+            user:  user
+          }
+        end
+
+        def user
+          "::#{ ApiAuthentication.configuration.app_user_model_class_name }".constantize.find(model.user.id).decorate context: context
+        end
+      end
+    end
+
     before_action :authenticate!
 
     before_action :check_base_policy
