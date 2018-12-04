@@ -28,7 +28,9 @@ class ApiAuthentication::Session < ApiAuthentication::ApplicationRecord
   validate :user_via_email_exists,                     on: :create, if: :email_login?
   validate :social_login_is_valid,                     on: :create, if: :social_login?
 
-  before_create :assign_user,                                       if: :email_login?
+  validate :user_is_not_blocked
+
+  before_validation :assign_user,                                   if: :email_login?
   before_validation :assign_or_create_new_user,        on: :create, if: :social_login?
 
   before_create :generate_unique_secure_token
@@ -63,6 +65,17 @@ class ApiAuthentication::Session < ApiAuthentication::ApplicationRecord
 
   def social_login_is_valid
     errors.add :base, login_service.error_response unless login_service.valid?
+  end
+
+  def user_is_not_blocked
+    return unless user.respond_to?(:is_blocked?)
+
+    return unless user.is_blocked?
+
+    errors.add(
+      :base,
+      I18n.t('api.user.is_blocked', default: I18n.t('api_session_recovering.errors.session.user_was_blocked'))
+    )
   end
 
   def login_service

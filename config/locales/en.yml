@@ -4,4 +4,7 @@ en:
     errors:
       reset_password:
         too_many_attempts: 'too many reset password attempts today'
+      session:
+        user_was_blocked:
+          'Your profile has been blocked by admin'
 
