@@ -34,4 +34,6 @@ ApiAuthentication.configure do |config|
     # => allow to set up in-app class name of user model
     #
     # config.app_user_model_class_name = 'User'
+
+    # config.handle_users_is_blocked = false
 end

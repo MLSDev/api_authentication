@@ -42,5 +42,7 @@ module ApiAuthentication
 
     config_accessor(:app_user_model_class_name) { 'User' }
 
+    config_accessor(:handle_users_is_blocked) { false }
+
   end
 end

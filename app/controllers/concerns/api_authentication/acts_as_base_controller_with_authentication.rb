@@ -72,6 +72,16 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
 
       @current_user_id  = current_jwt_hash[:user][:id]
 
+      #
+      # is_blocked
+      #
+      if \
+        ApiAuthentication.configuration.handle_users_is_blocked    &&
+        current_user_with_only_is_blocked.respond_to?(:is_blocked) &&
+        current_user_with_only_is_blocked.is_blocked?
+          return false
+      end
+
       return true
     rescue JWT::DecodeError
       return false
@@ -81,6 +91,11 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
   def current_user
     @current_user ||=
       "::#{ ApiAuthentication.configuration.app_user_model_class_name.constantize }".constantize.find current_user_id
+  end
+
+  def current_user_with_only_is_blocked
+    @current_user ||=
+      "::#{ ApiAuthentication.configuration.app_user_model_class_name.constantize }".constantize.select(:is_blocked).find current_user_id
   end
 
   def current_session
