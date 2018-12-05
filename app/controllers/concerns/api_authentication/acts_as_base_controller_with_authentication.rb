@@ -94,7 +94,7 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
   end
 
   def current_user_with_only_is_blocked
-    @current_user ||=
+    @current_user_with_only_is_blocked ||=
       "::#{ ApiAuthentication.configuration.app_user_model_class_name.constantize }".constantize.select(:is_blocked).find current_user_id
   end
 
