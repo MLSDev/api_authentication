@@ -1,6 +1,8 @@
 class ApiAuthentication::BaseController < ApiAuthentication::ApplicationController
   include ApiAuthentication::ActsAsBaseControllerWithAuthentication
 
+  before_action :authenticate!
+
   helper_method :collection, :resource, :parent
 
   rescue_from ActionController::ParameterMissing do |exception|
