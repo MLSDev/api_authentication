@@ -30,6 +30,7 @@ class ApiAuthentication::Session < ApiAuthentication::ApplicationRecord
 
   validate :user_is_not_blocked
 
+  before_validation :normalize_email
   before_validation :assign_user,                                   if: :email_login?
   before_validation :assign_or_create_new_user,        on: :create, if: :social_login?
 
@@ -44,6 +45,13 @@ class ApiAuthentication::Session < ApiAuthentication::ApplicationRecord
   end
 
   private
+
+  #
+  # CALLBACKs
+  #
+  def normalize_email
+    self.email = self.email.to_s.downcase.presence
+  end
 
   def assign_user
     self.user ||= user_via_email
