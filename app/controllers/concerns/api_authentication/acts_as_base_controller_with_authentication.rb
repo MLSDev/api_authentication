@@ -42,7 +42,7 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
 
     protect_from_forgery with: :exception, unless: -> { request.format.json? }
 
-    attr_reader :current_user_id, :current_token, :current_jwt_hash
+    attr_reader :current_user_id, :current_token, :current_jwt_hash, :current_session_created_at
   end
 
   private
@@ -72,14 +72,28 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
 
       @current_user_id  = current_jwt_hash[:user][:id]
 
+      @current_session_created_at = current_jwt_hash[:user][:created_at].to_datetime
+
       #
-      # is_blocked
+      # TODO: incapsulate me
       #
-      if \
-        ApiAuthentication.configuration.handle_users_is_blocked    &&
-        current_user_with_only_is_blocked.respond_to?(:is_blocked) &&
-        current_user_with_only_is_blocked.is_blocked?
+      if ApiAuthentication.configuration.handle_users_is_blocked
+        #
+        # is_blocked
+        #
+        if current_user_with_only_block_data.respond_to?(:is_blocked) && current_user_with_only_block_data.is_blocked?
           return false
+        end
+
+        #
+        # is_blocked_at
+        #
+        if \
+          current_user_with_only_block_data.respond_to?(:is_blocked_at) &&              # need to be sure that user blocking was implemented on the back-end side
+          current_user_with_only_block_data.is_blocked_at               &&              # if there was any value
+          current_user_with_only_block_data.is_blocked_at > current_session_created_at  # if user was banned after session was created - consider that session as blocked
+          return false
+        end
       end
 
       return true
@@ -93,9 +107,12 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
       "::#{ ApiAuthentication.configuration.app_user_model_class_name.constantize }".constantize.find current_user_id
   end
 
-  def current_user_with_only_is_blocked
-    @current_user_with_only_is_blocked ||=
-      "::#{ ApiAuthentication.configuration.app_user_model_class_name.constantize }".constantize.select(:is_blocked).find current_user_id
+  def current_user_with_only_block_data
+    @current_user_with_only_block_data ||=
+      "::#{ ApiAuthentication.configuration.app_user_model_class_name.constantize }".
+      constantize.
+      select(:is_blocked, :is_blocked_at).
+      find current_user_id
   end
 
   def current_session
