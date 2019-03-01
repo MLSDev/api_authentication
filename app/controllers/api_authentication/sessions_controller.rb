@@ -4,34 +4,29 @@ module ApiAuthentication
   class SessionsController < BaseController
     skip_before_action :authenticate!, only: :create
 
-    def destroy
-      current_session.destroy!
-
-      head :no_content
+    def create
+      build_resource
+      @resource = resource.auth
     end
 
-    def update
-      current_session.update! update_params
+    def destroy
+      current_user.update_column(:refresh_token, nil)
 
-      head :ok
+      head :no_content
     end
 
     private
 
     def resource
-      @session
+      @resource ||= build_resource
     end
 
     def build_resource
-      @session = ApiAuthentication::Session.email_login.new resource_params
+      @resource = ::ApiAuthentication::UserAuthenticator.new(resource_params)
     end
 
     def resource_params
       params.require(:session).permit(:email, :password)
-    end
-
-    def update_params
-      params.require(:session).permit(:push_token, :device_type)
     end
   end
 end

@@ -2,7 +2,7 @@
 
 module ApiAuthentication
   class BaseController < ApplicationController
-    include ApiAuthentication::ActsAsBaseControllerWithAuthentication
+    include ApiAuthentication::RequestAuthorizeable
 
     before_action :authenticate!
 

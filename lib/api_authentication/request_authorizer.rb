@@ -17,7 +17,7 @@ module ApiAuthentication
     attr_reader :header_auth_finder
 
     def decoded_auth_token
-      @decoded_auth_token ||= JsonWebToken::Access.decode(header_auth_finder.authorization)
+      @decoded_auth_token ||= JsonWebToken.decode(header_auth_finder.authorization)
     end
   end
 end

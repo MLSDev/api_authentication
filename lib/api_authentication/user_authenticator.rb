@@ -2,13 +2,17 @@
 
 module ApiAuthentication
   class UserAuthenticator
-    def initialize(email, password = nil)
-      @email = email
-      @password = password
+    def initialize(params)
+      @email = params[:email]
+      @password = params[:password]
+      @headers = params[:headers]
     end
 
     def auth
-      JsonWebToken::Creator.new(user).create
+      access_token = JsonWebToken.encode(access_token_payload)
+      refresh_token = user.refresh_tokens.create(token: SecureRandom.base58(100))
+
+      { access_token: access_token, refresh_token: refresh_token.token }
     end
 
     def user
@@ -22,5 +26,9 @@ module ApiAuthentication
     private
 
     attr_reader :email, :password
+
+    def access_token_payload
+      { user_id: user.id }
+    end
   end
 end
