@@ -18,4 +18,8 @@ module ApiAuthentication
   def self.configuration
     @configuration ||= Configuration.new
   end
+
+  def self.user_model
+    configuration.app_user_model_class_name.constantize
+  end
 end

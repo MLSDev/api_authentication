@@ -1,36 +1,37 @@
-class ApiAuthentication::SessionsController < ApiAuthentication::BaseController
-  skip_before_action :authenticate!, only: :create
+# frozen_string_literal: true
 
-  def destroy
-    current_session.destroy!
+module ApiAuthentication
+  class SessionsController < BaseController
+    skip_before_action :authenticate!, only: :create
 
-    head :no_content
-  end
+    def destroy
+      current_session.destroy!
 
-  def update
-    current_session.update! update_params
+      head :no_content
+    end
 
-    head :ok
-  end
+    def update
+      current_session.update! update_params
 
-  private
+      head :ok
+    end
 
-  def resource
-    @session
-  end
+    private
 
-  def build_resource
-    @session = ApiAuthentication::Session.email_login.new resource_params
-  end
+    def resource
+      @session
+    end
 
-  def resource_params
-    params.require(:session).permit \
-      :email, :password
-  end
+    def build_resource
+      @session = ApiAuthentication::Session.email_login.new resource_params
+    end
 
-  def update_params
-    params.permit \
-      :push_token, :device_type
+    def resource_params
+      params.require(:session).permit(:email, :password)
+    end
+
+    def update_params
+      params.require(:session).permit(:push_token, :device_type)
+    end
   end
 end
-

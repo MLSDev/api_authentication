@@ -8,3 +8,10 @@ en:
         user_was_blocked:
           'Your profile has been blocked by admin'
 
+  api_authentication:
+    errors:
+      auth:
+        invalid_credentials: 'Invalid credentials'
+      token:
+        missing: 'Missing token'
+        invalid: 'Invalid token'

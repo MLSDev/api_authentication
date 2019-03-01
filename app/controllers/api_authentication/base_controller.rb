@@ -1,59 +1,63 @@
-class ApiAuthentication::BaseController < ApiAuthentication::ApplicationController
-  include ApiAuthentication::ActsAsBaseControllerWithAuthentication
+# frozen_string_literal: true
 
-  before_action :authenticate!
+module ApiAuthentication
+  class BaseController < ApplicationController
+    include ApiAuthentication::ActsAsBaseControllerWithAuthentication
 
-  helper_method :collection, :resource, :parent
+    before_action :authenticate!
 
-  rescue_from ActionController::ParameterMissing do |exception|
-    @exception = exception
+    helper_method :collection, :resource, :parent
 
-    render :exception, status: :unprocessable_entity
-  end
+    rescue_from ActionController::ParameterMissing do |exception|
+      @exception = exception
 
-  rescue_from ActiveRecord::RecordInvalid, ActiveModel::StrictValidationFailed do
-    render :errors, status: :unprocessable_entity
-  end
+      render :exception, status: :unprocessable_entity
+    end
 
-  rescue_from ActiveRecord::RecordNotFound do
-    head :not_found
-  end
+    rescue_from ActiveRecord::RecordInvalid, ActiveModel::StrictValidationFailed do
+      render :errors, status: :unprocessable_entity
+    end
 
-  def create
-    build_resource
+    rescue_from ActiveRecord::RecordNotFound do
+      head :not_found
+    end
 
-    resource.save!
-  end
+    def create
+      build_resource
 
-  def update
-    resource.update! resource_params
-  end
+      resource.save!
+    end
 
-  def destroy
-    resource.destroy
+    def update
+      resource.update! resource_params
+    end
 
-    head :no_content
-  end
+    def destroy
+      resource.destroy
 
-  private
+      head :no_content
+    end
 
-  def parent
-    raise NotImplementedError
-  end
+    private
 
-  def resource
-    raise NotImplementedError
-  end
+    def parent
+      raise NotImplementedError
+    end
 
-  def resource_params
-    raise NotImplementedError
-  end
+    def resource
+      raise NotImplementedError
+    end
 
-  def build_resource
-    raise NotImplementedError
-  end
+    def resource_params
+      raise NotImplementedError
+    end
 
-  def collection
-    raise NotImplementedError
+    def build_resource
+      raise NotImplementedError
+    end
+
+    def collection
+      raise NotImplementedError
+    end
   end
 end

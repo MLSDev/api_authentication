@@ -44,5 +44,8 @@ module ApiAuthentication
 
     config_accessor(:handle_users_is_blocked) { false }
 
+    config_accessor(:secret_key) { '<%= SecureRandom.hex(64) %>' }
+    config_accessor(:jwt_token_exp) { 1.hour.from_now }
+    config_accessor(:refresh_token_exp) { 1.month.from_now }
   end
 end

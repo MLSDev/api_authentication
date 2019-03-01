@@ -6,10 +6,6 @@ Bundler.require(:default, Rails.env)
 
 require 'api_authentication'
 
-require 'geocoder'
-
-require 'paperclip'
-
 require 'jwt'
 
 require 'draper'
