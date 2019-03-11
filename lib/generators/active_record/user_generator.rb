@@ -10,16 +10,10 @@ module ActiveRecord
 
       argument :attributes, type: :array, default: [], banner: 'field:type field:type'
 
-      class_option :primary_key_type, type: :string, desc: 'The type for primary key'
-
       source_root File.expand_path('../templates/user', __FILE__)
 
-      def copy_user_migration
-        if (behavior == :invoke && model_exists?) || (behavior == :revoke && migration_exists?(table_name))
-          migration_template "migration_existing.rb", "#{db_migrate_path}/add_devise_to_#{table_name}.rb", migration_version: migration_version
-        else
-          migration_template "migration.rb", "#{db_migrate_path}/api_authentication_create_#{table_name}.rb", migration_version: migration_version
-        end
+      def copy_model_migration
+        migration_template 'migration.rb', "#{db_migrate_path}/api_authentication_create_#{table_name}.rb", migration_version: migration_version
       end
 
       def generate_model
@@ -58,11 +52,6 @@ RUBY
   validates :email, presence: true, uniqueness: { case_sensitive: false }, email: true
   validates :password, length: { minimum: 6 }, allow_nil: true
         CONTENT
-      end
-
-      def primary_key_type
-        key_string = options[:primary_key_type]
-        ", id: :#{key_string}" if key_string
       end
     end
   end
