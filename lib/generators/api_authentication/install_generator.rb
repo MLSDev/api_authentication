@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApiAuthentication
   module Generators
     class InstallGenerator < Rails::Generators::Base
@@ -8,7 +10,6 @@ module ApiAuthentication
       def copy_initializer
         template 'api_authentication.rb', 'config/initializers/api_authentication.rb'
       end
-
     end
   end
 end

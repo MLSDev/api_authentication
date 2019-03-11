@@ -22,7 +22,7 @@ module ApiAuthentication
     end
 
     def build_resource
-      @resource = ::ApiAuthentication::UserAuthenticator.new(resource_params)
+      @resource = ::ApiAuthentication::UserAuthenticator.new(resource_params.merge(request: request))
     end
 
     def resource_params
