@@ -5,14 +5,6 @@ module ApiAuthentication
     extend ActiveSupport::Concern
 
     included do
-      if defined?("::#{ApiAuthentication.user_model}Decorator".constantize)
-        unless defined?(::ApiAuthentication::UserDecorator)
-          module ApiAuthentication
-            class UserDecorator < "::#{ApiAuthentication.user_model}Decorator".constantize; end
-          end
-        end
-      end
-
       before_action :check_base_policy
 
       attr_reader :current_user

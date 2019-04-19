@@ -10,7 +10,7 @@ module ApiAuthentication
     end
 
     def destroy
-      current_user.update_column(:refresh_token, nil)
+      current_user.refresh_tokens.find_by!(token: params[:refresh_token])
 
       head :no_content
     end

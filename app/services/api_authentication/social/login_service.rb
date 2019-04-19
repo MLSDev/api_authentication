@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class ApiAuthentication::Social::LoginService
   attr_reader :social_login_provider, :access_token, :service
 
   delegate :user, :valid?, :error_response, to: :service, allow_nil: false
 
-  def initialize session
+  def initialize(session)
     @social_login_provider = session.social_login_provider
     @access_token          = session.access_token
     # twitter could require other tokens
