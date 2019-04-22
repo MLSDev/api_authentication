@@ -15,11 +15,24 @@ module ApiAuthentication
     config_accessor(:registration_fields) { %w[email first_name last_name username full_name birthday avatar] }
 
     #
+    # => Enable Registrations endpoint
+    #
+    config_accessor(:registrations) { true }
+
+    #
+    # => Enable Push Tokens endpoint
+    #
+    config_accessor(:push_tokens) { true }
+
+    #
+    # => Enable Sessions endpoint
+    #
+    config_accessor(:sessions) { true }
+
+    #
     # => add login from social_networks
     #
     config_accessor(:facebook_login) { true }
-    # config_accessor(:filled_by_facebook) { %w[first_name last_name username full_name birthday avatar] }
-
     #
     # => allow to set up in-app class name of user model
     #
