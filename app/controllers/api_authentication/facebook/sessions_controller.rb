@@ -10,11 +10,13 @@ module ApiAuthentication
       private
 
       def build_resource
-        @resource = ::ApiAuthentication::Session.social_login.facebook.new resource_params
+        @resource = ::ApiAuthentication::SocialLogin.new resource_params
       end
 
       def resource_params
-        params.permit(:access_token)
+        permitted = params.require(:session).permit(:access_token)
+        permitted[:provider] = :facebook
+        permitted
       end
     end
   end

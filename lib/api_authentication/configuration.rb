@@ -12,7 +12,7 @@ module ApiAuthentication
     #
     # => fields for registration
     #
-    config_accessor(:registration_fields) { %w[first_name last_name username full_name birthday avatar] }
+    config_accessor(:registration_fields) { %w[email first_name last_name username full_name birthday avatar] }
 
     #
     # => add login from social_networks
