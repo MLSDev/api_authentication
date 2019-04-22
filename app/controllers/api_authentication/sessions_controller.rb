@@ -2,7 +2,7 @@
 
 module ApiAuthentication
   class SessionsController < BaseController
-    skip_before_action :authenticate!, only: :create
+    skip_before_action :authenticate!
 
     def create
       build_resource
@@ -10,19 +10,19 @@ module ApiAuthentication
     end
 
     def destroy
-      current_user.refresh_tokens.find_by!(token: params[:refresh_token])
+      ApiAuthentication::RefreshAuthorizer.new(request.headers).auth.destroy!
 
       head :no_content
     end
 
     private
 
-    def resource
-      @resource ||= build_resource
-    end
-
     def build_resource
       @resource = ::ApiAuthentication::UserAuthenticator.new(resource_params.merge(request: request))
+    end
+
+    def resource
+      @resource ||= build_resource
     end
 
     def resource_params

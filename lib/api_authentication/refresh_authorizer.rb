@@ -7,7 +7,7 @@ module ApiAuthentication
     end
 
     def auth
-      @user ||= ApiAuthentication.refresh_token_model.find_by!(token: header_auth_finder.authorization).user
+      @token ||= ApiAuthentication.refresh_token_model.find_by!(token: header_auth_finder.authorization)
     rescue ActiveRecord::RecordNotFound => _e
       raise ApiAuthentication::Token::Invalid, I18n.t('api_authentication.errors.token.invalid')
     end

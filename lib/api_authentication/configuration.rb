@@ -37,6 +37,7 @@ module ApiAuthentication
     # => allow to set up in-app class name of user model
     #
     config_accessor(:app_user_model_class_name) { 'User' }
+    config_accessor(:app_refresh_token_model_class_name) { 'RefreshToken' }
 
     #
     # => secret_key
