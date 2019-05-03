@@ -4,6 +4,8 @@ module ApiAuthentication
   class SessionsController < BaseController
     skip_before_action :authenticate!
 
+    attr_reader :resource
+
     def create
       build_resource
       @resource = resource.auth
@@ -19,10 +21,6 @@ module ApiAuthentication
 
     def build_resource
       @resource = ::ApiAuthentication::UserAuthenticator.new(resource_params.merge(request: request))
-    end
-
-    def resource
-      @resource ||= build_resource
     end
 
     def resource_params

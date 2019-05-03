@@ -12,7 +12,7 @@ module ApiAuthentication
     #
     # => fields for registration
     #
-    config_accessor(:registration_fields) { %w[email first_name last_name username full_name birthday avatar] }
+    config_accessor(:registration_fields) { %i[email first_name last_name username birthday avatar] }
 
     #
     # => Enable Registrations endpoint
@@ -38,6 +38,12 @@ module ApiAuthentication
     #
     config_accessor(:app_user_model_class_name) { 'User' }
     config_accessor(:app_refresh_token_model_class_name) { 'RefreshToken' }
+    config_accessor(:app_push_token_model_class_name) { 'PushToken' }
+
+    #
+    # => User model fields
+    #
+    config_accessor(:user_fields) { %i[email first_name last_name username birthday avatar] }
 
     #
     # => secret_key

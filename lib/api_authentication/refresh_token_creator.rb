@@ -12,7 +12,7 @@ module ApiAuthentication
 
       ApiAuthentication.refresh_token_model.create!(
         user_id: user.id,
-        token: SecureRandom.base58(100),
+        token: ApiAuthentication.refresh_token_model.generate_token,
         expired_at: ApiAuthentication.configuration.refresh_token_exp,
         ip_address: request.remote_ip,
         user_agent: request.user_agent,

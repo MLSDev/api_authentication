@@ -2,14 +2,12 @@
 
 module ApiAuthentication
   class RegistrationsController < BaseController
+    attr_reader :resource
+
     private
 
     def build_resource
       @resource = ApiAuthentication.user_model.new(resource_params)
-    end
-
-    def resource
-      @resource ||= build_resource
     end
 
     def resource_params

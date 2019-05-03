@@ -14,7 +14,6 @@ Gem::Specification.new do |s|
   s.files = Dir["{ app, config, db, lib }/**/*"] + ['MIT-LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['spec/**/*']
 
-  s.add_dependency 'email_validator'
   s.add_dependency 'bcrypt'
   s.add_dependency 'swagger-blocks'
   s.add_dependency 'jwt'
