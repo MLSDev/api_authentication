@@ -10,6 +10,12 @@ module ApiAuthentication
   autoload :RequestAuthorizer, 'api_authentication/request_authorizer'
   autoload :UserAuthenticator, 'api_authentication/user_authenticator'
 
+  module Models
+    autoload :User, 'api_authentication/models/user'
+    autoload :RefreshToken, 'api_authentication/models/refresh_token'
+    autoload :PushToken, 'api_authentication/models/push_token'
+  end
+
   SWAGGER_CLASSES = [
     ::ApiAuthentication::SessionDocs
   ]

@@ -2,18 +2,18 @@
 
 module ApiAuthentication
   module Models
-    class User
+    module User
       extend ActiveSupport::Concern
 
       EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i.freeze
 
       included do
         if ApiAuthentication.configuration.app_refresh_token_model_class_name
-          has_many ApiAuthentication.configuration.app_refresh_token_model_class_name.underscore
+          has_many ApiAuthentication.configuration.app_refresh_token_model_class_name.underscore.to_sym
         end
 
         if ApiAuthentication.configuration.app_push_token_model_class_name
-          has_many ApiAuthentication.configuration.app_push_token_model_class_name.underscore
+          has_many ApiAuthentication.configuration.app_push_token_model_class_name.underscore.to_sym
         end
 
         validates :email, format: { with: EMAIL_REGEX } if ApiAuthentication.user_field_defined?(:email)

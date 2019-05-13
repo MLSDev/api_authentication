@@ -2,11 +2,11 @@
 
 module ApiAuthentication
   module Models
-    class RefreshToken
+    module RefreshToken
       extend ActiveSupport::Concern
 
       included do
-        belongs_to ApiAuthentication.configuration.app_user_model_class_name.downcase
+        belongs_to ApiAuthentication.configuration.app_user_model_class_name.downcase.to_sym
 
         validates :expired_at, :ip_address, :user_agent, presence: true
         validates :token, uniqueness: true
