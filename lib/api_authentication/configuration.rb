@@ -33,11 +33,20 @@ module ApiAuthentication
     # => add login from social_networks
     #
     config_accessor(:facebook_login) { true }
+
     #
     # => allow to set up in-app class name of user model
     #
     config_accessor(:app_user_model_class_name) { 'User' }
+
+    #
+    # => allow to set up in-app class name of refresh token model
+    #
     config_accessor(:app_refresh_token_model_class_name) { 'RefreshToken' }
+
+    #
+    # => allow to set up in-app class name of push token model
+    #
     config_accessor(:app_push_token_model_class_name) { 'PushToken' }
 
     #

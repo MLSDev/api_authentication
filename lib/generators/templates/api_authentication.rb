@@ -6,21 +6,53 @@ ApiAuthentication.configure do |config|
   # config.controller_to_inherit_from = 'ActionController::Base'
 
   #
-  # => Table name of User model, default is `users`
+  # => fields for registration
   #
-  # config.users_table_name =  'users'
+  # config.registration_fields = %i[email first_name last_name username birthday avatar]
+  #
+
+  #
+  # => Enable Registrations endpoint
+  #
+  # config.registrations = true
+
+  #
+  # => Enable Push Tokens endpoint
+  #
+  # config.push_tokens = true
+
+  #
+  # => Enable Sessions endpoint
+  #
+  # config.sessions = true
 
   # => add login from social_networks
   #
-  # config.include_facebook_login = true
+  # config.facebook_login = true
 
   #
   # => allow to set up in-app class name of user model
   #
   # config.app_user_model_class_name = 'User'
+
+  #
+  # => allow to set up in-app class name of refresh token model
+  #
   # config.app_refresh_token_model_class_name = 'RefreshToken'
 
+  #
+  # => allow to set up in-app class name of push token model
+  #
+  # config.app_push_token_model_class_name = 'PushToken'
+
+  #
+  # => secret_key
+  #
+  # config.secret_key = 'key'
+
+  #
+  # => JWT token expiration
+  #
   # config.jwt_token_exp = 1.hour.from_now
-  # config.include_refresh_token = false
   # config.refresh_token_exp = 1.month.from_now
 end
