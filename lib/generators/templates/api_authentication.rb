@@ -46,6 +46,11 @@ ApiAuthentication.configure do |config|
   # config.app_push_token_model_class_name = 'PushToken'
 
   #
+  # => User model fields
+  #
+  # config.user_fields = %i[email first_name last_name username birthday avatar]
+
+  #
   # => secret_key
   #
   # config.secret_key = 'key'

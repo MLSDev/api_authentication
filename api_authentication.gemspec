@@ -31,17 +31,13 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'spring'
   s.add_development_dependency 'spring-commands-rspec'
 
-  # s.add_development_dependency 'wwtd'
   s.add_development_dependency 'rspec-core'
   s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'rspec-activemodel-mocks'
   s.add_development_dependency 'rspec-its'
-  s.add_development_dependency 'rails-controller-testing'
 
-  # s.add_development_dependency 'shoulda'
   s.add_development_dependency 'shoulda-matchers'
   s.add_development_dependency 'shoulda-callback-matchers'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'factory_bot_rails'
-  s.add_development_dependency 'faker'
+  s.add_development_dependency 'ffaker'
 end

@@ -1,16 +1,15 @@
 ENV['RAILS_ENV'] ||= 'test'
-require 'spec_helper'
 require File.expand_path('../dummy/config/environment', __FILE__)
+require 'spec_helper'
 require 'rspec/rails'
-require 'rspec/active_model/mocks'
 require 'rspec/its'
 require 'shoulda-matchers'
 require 'shoulda-callback-matchers'
 require 'database_cleaner'
-require 'faker'
+require 'ffaker'
 require 'factory_bot_rails'
 
-Dir[Rails.root.join('spec/support/**/*.rb')].each {|f| require f}
+Dir['./spec/support/**/*.rb'].each(&method(:require))
 
 ActiveRecord::Migration.maintain_test_schema!
 
