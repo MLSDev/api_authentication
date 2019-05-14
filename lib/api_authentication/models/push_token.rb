@@ -10,10 +10,7 @@ module ApiAuthentication
 
         validates :token, presence: true
 
-        enum device_type: {
-          android: 0,
-          ios: 1
-        }
+        enum device_type: { android: 0, ios: 1 }
       end
     end
   end
