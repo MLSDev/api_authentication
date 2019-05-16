@@ -6,20 +6,14 @@ module ApiAuthentication
 
     def self.encode(payload)
       payload[:exp] = ApiAuthentication.configuration.jwt_token_exp.from_now.to_i
-      JWT.encode(payload, hmac_secret)
+      JWT.encode(payload, HMAC_SECRET)
     end
 
     def self.decode(token)
-      body = JWT.decode(token, hmac_secret)[0]
+      body = JWT.decode(token, HMAC_SECRET)[0]
       HashWithIndifferentAccess.new(body)
     rescue JWT::DecodeError => e
       raise ApiAuthentication::Token::Invalid, e.message
     end
-
-    def self.hmac_secret
-      HMAC_SECRET
-    end
-
-    private_class_method :hmac_secret
   end
 end

@@ -6,8 +6,6 @@ Bundler.require(:default, Rails.env)
 
 require 'api_authentication'
 
-require 'jwt'
-
 require 'draper'
 
 module Dummy

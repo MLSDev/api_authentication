@@ -4,6 +4,6 @@ gemspec
 
 gem 'rails'
 
-group :development do
+group :development, :test do
   gem 'pry-rails'
 end
