@@ -8,6 +8,8 @@ module ApiAuthentication
       EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i.freeze
 
       included do
+        has_secure_password
+
         if ApiAuthentication.configuration.app_refresh_token_model_class_name
           has_many ApiAuthentication.configuration.app_refresh_token_model_class_name.underscore.to_sym
         end

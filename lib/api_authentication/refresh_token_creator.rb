@@ -15,7 +15,7 @@ module ApiAuthentication
 
     private
 
-    attr_reader :request
+    attr_reader :request, :user
 
     def token_params
       {
