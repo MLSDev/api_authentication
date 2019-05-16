@@ -32,15 +32,5 @@ describe ApiAuthentication::RefreshTokenCreator do
         expect(refresh_token.user_agent).to eq request.user_agent
       end
     end
-
-    context 'not create token' do
-      subject { described_class.new(user: user, request: {}) }
-
-      it do
-        expect(ApiAuthentication.configuration).to receive(:app_refresh_token_model_class_name)
-
-        expect(subject.create).to be nil
-      end
-    end
   end
 end

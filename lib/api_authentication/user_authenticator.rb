@@ -29,8 +29,9 @@ module ApiAuthentication
     end
 
     def refresh_token
-      refresh_token = RefreshTokenCreator.new(user: user, request: request).create
-      refresh_token.present? ? { refresh_token: refresh_token.token } : {}
+      return {} unless ApiAuthentication.configuration.app_refresh_token_model_class_name
+
+      { refresh_token: RefreshTokenCreator.new(user: user, request: request).create.token }
     end
   end
 end
