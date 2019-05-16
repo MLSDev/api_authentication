@@ -5,7 +5,7 @@ module ApiAuthentication
     HMAC_SECRET = ApiAuthentication.configuration.secret_key
 
     def self.encode(payload)
-      payload[:exp] = ApiAuthentication.configuration.jwt_token_exp.to_i
+      payload[:exp] = ApiAuthentication.configuration.jwt_token_exp.from_now.to_i
       JWT.encode(payload, hmac_secret)
     end
 

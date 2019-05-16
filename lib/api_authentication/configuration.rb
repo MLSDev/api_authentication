@@ -62,7 +62,7 @@ module ApiAuthentication
     #
     # => JWT token expiration
     #
-    config_accessor(:jwt_token_exp) { 1.hour.from_now }
-    config_accessor(:refresh_token_exp) { 1.month.from_now }
+    config_accessor(:jwt_token_exp) { 1.hour }
+    config_accessor(:refresh_token_exp) { 1.month }
   end
 end
