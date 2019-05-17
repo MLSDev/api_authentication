@@ -9,11 +9,16 @@ module ApiAuthentication
   autoload :RefreshTokenCreator, 'api_authentication/refresh_token_creator'
   autoload :RequestAuthorizer, 'api_authentication/request_authorizer'
   autoload :UserAuthenticator, 'api_authentication/user_authenticator'
+  autoload :SocialLogin, 'api_authentication/social_login'
 
   module Models
     autoload :User, 'api_authentication/models/user'
     autoload :RefreshToken, 'api_authentication/models/refresh_token'
     autoload :PushToken, 'api_authentication/models/push_token'
+  end
+
+  module SocialProviders
+    autoload :Facebook, 'api_authentication/social_providers/facebook'
   end
 
   SWAGGER_CLASSES = [

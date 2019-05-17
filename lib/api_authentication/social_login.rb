@@ -11,12 +11,7 @@ module ApiAuthentication
 
     def save!
       @user = existing_user || new_user
-
-      ApiAuthentication.configuration.registration_fields.each do |field|
-        @user[field] = provider_data[field]
-      end
-
-      @user.save!
+      @user.persisted? ? update_existing_user : create_new_user
     end
 
     private
@@ -31,7 +26,19 @@ module ApiAuthentication
     end
 
     def new_user
-      ApiAuthentication.user_model.new("#{provider}_id": provider_data[:id])
+      ApiAuthentication.user_model.new("#{provider}_id": provider_data[:id], password: SecureRandom.uuid)
+    end
+
+    def update_existing_user
+      @user.update_column("#{provider}_id", provider_data[:id])
+    end
+
+    def create_new_user
+      ApiAuthentication.configuration.registration_fields.each do |field|
+        @user[field] ||= provider_data[field]
+      end
+
+      @user.save!
     end
   end
 end

@@ -9,6 +9,8 @@ class CreateApiAuthUsers < ActiveRecord::Migration[5.2]
       t.string :password_digest, null: false
       t.string :username, null: false
       t.date :birthday, null: false
+      t.string :avatar
+      t.string :facebook_id
     end
 
     add_index :users, :email, unique: true
