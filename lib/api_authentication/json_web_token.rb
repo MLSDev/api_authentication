@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'jwt'
+
 module ApiAuthentication
   class JsonWebToken
     HMAC_SECRET = ApiAuthentication.configuration.secret_key

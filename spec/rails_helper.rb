@@ -19,10 +19,13 @@ RSpec.configure do |config|
   config.order = :random
   config.color = true
   config.tty = true
-
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.include ApiAuthentication::Engine.routes.url_helpers
+  config.include Requests::JsonHelpers, type: :request
+  config.include RequestAuthentication, type: :request
 end
 
 ActiveJob::Base.queue_adapter = :test
