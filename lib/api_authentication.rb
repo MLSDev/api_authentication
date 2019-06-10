@@ -41,6 +41,10 @@ module ApiAuthentication
     configuration.app_refresh_token_model_class_name.constantize
   end
 
+  def self.push_token_model
+    configuration.app_push_token_model_class_name.constantize
+  end
+
   def self.user_field_defined?(field)
     configuration.user_fields.include?(field)
   end

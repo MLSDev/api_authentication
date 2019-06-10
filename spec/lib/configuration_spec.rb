@@ -5,7 +5,7 @@ require 'rails_helper'
 describe ApiAuthentication::Configuration do
   its(:controller_to_inherit_from) { should eq 'ActionController::Base' }
 
-  its(:registration_fields) { should eq %i[email first_name last_name username birthday avatar] }
+  its(:registration_fields) { should eq %i[email password first_name last_name username birthday] }
 
   its(:registrations) { should eq true }
   its(:push_tokens) { should eq true }
@@ -16,7 +16,7 @@ describe ApiAuthentication::Configuration do
   its(:app_refresh_token_model_class_name) { should eq 'RefreshToken' }
   its(:app_push_token_model_class_name) { should eq 'PushToken' }
 
-  its(:user_fields) { should eq %i[email first_name last_name username birthday avatar] }
+  its(:user_fields) { should eq %i[email password first_name last_name username birthday] }
 
   its(:secret_key) { should eq '<%= SecureRandom.hex(64) %>' }
 

@@ -12,7 +12,7 @@ module ApiAuthentication
     #
     # => fields for registration
     #
-    config_accessor(:registration_fields) { %i[email first_name last_name username birthday avatar] }
+    config_accessor(:registration_fields) { %i[email password first_name last_name username birthday] }
 
     #
     # => Enable Registrations endpoint
@@ -52,7 +52,7 @@ module ApiAuthentication
     #
     # => User model fields
     #
-    config_accessor(:user_fields) { %i[email first_name last_name username birthday avatar] }
+    config_accessor(:user_fields) { %i[email password first_name last_name username birthday] }
 
     #
     # => secret_key

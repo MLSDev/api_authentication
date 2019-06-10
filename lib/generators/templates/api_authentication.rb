@@ -8,7 +8,7 @@ ApiAuthentication.configure do |config|
   #
   # => fields for registration
   #
-  # config.registration_fields = %i[email first_name last_name username birthday avatar]
+  # config.registration_fields = %i[email first_name last_name username birthday]
   #
 
   #
@@ -48,7 +48,7 @@ ApiAuthentication.configure do |config|
   #
   # => User model fields
   #
-  # config.user_fields = %i[email first_name last_name username birthday avatar]
+  # config.user_fields = %i[email first_name last_name username birthday]
 
   #
   # => secret_key

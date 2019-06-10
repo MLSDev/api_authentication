@@ -11,11 +11,11 @@ module ApiAuthentication
         has_secure_password
 
         if ApiAuthentication.configuration.app_refresh_token_model_class_name
-          has_many ApiAuthentication.configuration.app_refresh_token_model_class_name.underscore.to_sym
+          has_many ApiAuthentication.configuration.app_refresh_token_model_class_name.pluralize.underscore.to_sym
         end
 
         if ApiAuthentication.configuration.app_push_token_model_class_name
-          has_many ApiAuthentication.configuration.app_push_token_model_class_name.underscore.to_sym
+          has_many ApiAuthentication.configuration.app_push_token_model_class_name.pluralize.underscore.to_sym
         end
 
         validates :email, format: { with: EMAIL_REGEX } if ApiAuthentication.user_field_defined?(:email)

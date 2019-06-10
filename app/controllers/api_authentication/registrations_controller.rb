@@ -3,6 +3,7 @@
 module ApiAuthentication
   class RegistrationsController < BaseController
     attr_reader :resource
+    skip_before_action :authenticate!
 
     private
 

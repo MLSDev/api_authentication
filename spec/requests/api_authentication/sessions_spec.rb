@@ -10,7 +10,6 @@ describe 'Sessions', type: :request do
   before(:each) { @routes = ApiAuthentication::Engine.routes }
 
   describe '/sessions' do
-    # routes { ApiAuthentication::Engine.routes }
     it 'creates new session' do
       headers = {
         'User-Agent': 'test'
@@ -30,7 +29,7 @@ describe 'Sessions', type: :request do
     it 'deletes refresh token' do
       refresh_token = create(:refresh_token, user: user)
       headers = {
-        'Authorization' => "Bearer #{refresh_token.token}"
+        'Authorization': "Bearer #{refresh_token.token}"
       }
 
       delete sessions_path(format: :json), params: {}, headers: headers

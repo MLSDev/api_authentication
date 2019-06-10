@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ApiAuthentication::Engine.routes.draw do
-  resource :push_tokens, only: :create if ApiAuthentication.configuration.push_tokens
+  resource :push_tokens, only: %i[create destroy] if ApiAuthentication.configuration.push_tokens
   resource :registrations, only: :create if ApiAuthentication.configuration.registrations
 
   if ApiAuthentication.configuration.sessions

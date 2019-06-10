@@ -9,7 +9,7 @@ module ApiAuthentication
     end
 
     def resource
-      @resource = current_user.push_tokens.find_by!(token: params[:token])
+      @resource ||= current_user.push_tokens.find_by!(token: params[:token])
     end
 
     def resource_params
