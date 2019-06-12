@@ -17,6 +17,18 @@ module ApiAuthentication
           SecureRandom.base58(100)
         end
       end
+
+      def expired?
+        expired_at <= DateTime.current
+      end
+
+      def revoked?
+        revoked_at.present?
+      end
+
+      def revoke!
+        update!(revoked_at: DateTime.current)
+      end
     end
   end
 end

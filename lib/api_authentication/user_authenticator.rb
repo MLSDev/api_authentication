@@ -3,6 +3,7 @@
 module ApiAuthentication
   class UserAuthenticator
     def initialize(params)
+      @user = params[:user]
       @email = params[:email]
       @password = params[:password]
       @request = params[:request]
@@ -13,8 +14,9 @@ module ApiAuthentication
     end
 
     def user
-      @user ||= ApiAuthentication.user_model.find_by(email: email)
+      return if @user
 
+      @user = ApiAuthentication.user_model.find_by(email: email)
       return @user if @user&.authenticate(password)
 
       raise ApiAuthentication::Auth::InvalidCredentials, I18n.t('api_authentication.errors.auth.invalid_credentials')

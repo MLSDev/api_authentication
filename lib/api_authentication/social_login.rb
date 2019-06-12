@@ -34,11 +34,15 @@ module ApiAuthentication
     end
 
     def create_new_user
-      ApiAuthentication.configuration.registration_fields.each do |field|
+      registration_fields.each do |field|
         @user[field] ||= provider_data[field]
       end
 
       @user.save!
+    end
+
+    def registration_fields
+      ApiAuthentication.configuration.registration_fields.reject { |f| f == :password }
     end
   end
 end

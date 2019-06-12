@@ -33,7 +33,7 @@ module ApiAuthentication
     end
 
     def destroy
-      resource.destroy
+      resource.destroy!
 
       head :no_content
     end

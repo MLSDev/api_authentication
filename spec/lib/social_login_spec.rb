@@ -22,8 +22,7 @@ describe ApiAuthentication::SocialLogin do
                 first_name: FFaker::Name.first_name,
                 last_name: FFaker::Name.last_name,
                 username: FFaker::Internet.user_name,
-                birthday: Date.current,
-                avatar: FFaker::Image.url
+                birthday: Date.current
               }
             end
 
@@ -57,8 +56,7 @@ describe ApiAuthentication::SocialLogin do
             first_name: FFaker::Name.first_name,
             last_name: FFaker::Name.last_name,
             username: FFaker::Internet.user_name,
-            birthday: Date.current,
-            avatar: FFaker::Image.url
+            birthday: Date.current
           }
         end
 
@@ -78,7 +76,6 @@ describe ApiAuthentication::SocialLogin do
           expect(subject.user.last_name).to eq provider_data[:last_name]
           expect(subject.user.username).to eq provider_data[:username]
           expect(subject.user.birthday).to eq provider_data[:birthday]
-          expect(subject.user.avatar).to eq provider_data[:avatar]
         end
       end
     end

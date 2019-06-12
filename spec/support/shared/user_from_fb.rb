@@ -19,6 +19,5 @@ shared_examples 'updating_existing_user_from_fb' do
     expect(user.last_name).to_not eq provider_data[:last_name]
     expect(user.username).to_not eq provider_data[:username]
     expect(user.birthday).to_not eq provider_data[:birthday]
-    expect(user.avatar).to_not eq provider_data[:avatar]
   end
 end
