@@ -15,5 +15,6 @@ shared_examples 'api_auth_user' do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
     it { should validate_presence_of(:username) }
+    it { should validate_presence_of(:birthday) }
   end
 end

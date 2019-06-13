@@ -20,4 +20,39 @@ shared_examples 'api_auth_refresh_token' do
       expect(described_class.generate_token).to eq token
     end
   end
+
+  describe '#expired?' do
+    it 'true' do
+      subject.expired_at = DateTime.current
+
+      expect(subject.expired?).to be_truthy
+    end
+
+    it 'false' do
+      subject.expired_at = DateTime.current + 1.minute
+
+      expect(subject.expired?).to be_falsey
+    end
+  end
+
+  describe '#revoked?' do
+    it 'true' do
+      subject.revoked_at = DateTime.current
+
+      expect(subject.revoked?).to be_truthy
+    end
+
+    it 'false' do
+      subject.revoked_at = nil
+
+      expect(subject.revoked?).to be_falsey
+    end
+  end
+
+  describe '#revoke!' do
+    it do
+      subject.revoke!
+      expect(subject.revoked_at).to_not be_nil
+    end
+  end
 end
