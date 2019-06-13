@@ -14,7 +14,9 @@ module ApiAuthentication
       render :exception, status: :unprocessable_entity
     end
 
-    rescue_from ActiveRecord::RecordInvalid, ActiveModel::StrictValidationFailed do
+    rescue_from ActiveRecord::RecordInvalid do |error|
+      @errors = error.record.errors
+
       render :errors, status: :unprocessable_entity
     end
 

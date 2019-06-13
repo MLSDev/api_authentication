@@ -59,5 +59,6 @@ ApiAuthentication.configure do |config|
   # => JWT token expiration
   #
   # config.jwt_token_exp = 1.hour.from_now
+  # config.refresh_tokens = true
   # config.refresh_token_exp = 1.month.from_now
 end

@@ -56,7 +56,7 @@ http_interactions:
       - '241'
     body:
       encoding: ASCII-8BIT
-      string: '{"id":"118777242377720","name":"Open Graph Test User","first_name":"Open","last_name":"User","picture":{"data":{"height":320,"is_silhouette":true,"url":"https:\/\/platform-lookaside.fbsbx.com\/platform\/profilepic\/?asid=118777242377720&height=300&width=300&ext=1560697844&hash=AeRpefeAIAKYbriL","width":320}}}'
+      string: '{"id":"118777242377720","email":"open@graph.com","birthday":"2000-01-01","name":"Open Graph Test User","first_name":"Open","last_name":"User","picture":{"data":{"height":320,"is_silhouette":true,"url":"https:\/\/platform-lookaside.fbsbx.com\/platform\/profilepic\/?asid=118777242377720&height=300&width=300&ext=1560697844&hash=AeRpefeAIAKYbriL","width":320}}}'
     http_version: 
   recorded_at: Fri, 17 May 2019 15:10:44 GMT
 recorded_with: VCR 4.0.0

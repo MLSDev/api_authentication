@@ -22,6 +22,7 @@ module ApiAuthentication
         validates :first_name, presence: true if ApiAuthentication.user_field_defined?(:first_name)
         validates :last_name, presence: true if ApiAuthentication.user_field_defined?(:last_name)
         validates :username, presence: true if ApiAuthentication.user_field_defined?(:username)
+        validates :birthday, presence: true if ApiAuthentication.user_field_defined?(:birthday)
       end
     end
   end

@@ -7,6 +7,12 @@ module ApiAuthentication
 
       attr_reader :resource
 
+      def create
+        build_resource
+        @resource.call
+        @resource = @resource.tokens
+      end
+
       private
 
       def build_resource
@@ -16,6 +22,7 @@ module ApiAuthentication
       def resource_params
         permitted = params.require(:session).permit(:access_token)
         permitted[:provider] = :facebook
+        permitted[:request] = request
         permitted
       end
     end

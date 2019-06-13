@@ -21,5 +21,8 @@ describe ApiAuthentication::Configuration do
   its(:secret_key) { should eq '<%= SecureRandom.hex(64) %>' }
 
   its(:jwt_token_exp) { should eq 1.hour }
+
+  its(:refresh_tokens) { should eq true }
+
   its(:refresh_token_exp) { should eq 1.month }
 end

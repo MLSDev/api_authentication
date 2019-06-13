@@ -2,19 +2,29 @@
 
 module ApiAuthentication
   class SocialLogin
-    attr_reader :provider, :access_token, :user
+    attr_reader :provider, :access_token, :user, :tokens, :request
 
     def initialize(params)
       @provider = params[:provider]
       @access_token = params[:access_token]
+      @request = params[:request]
     end
 
-    def save!
+    def call
+      save_info!
+      create_tokens!
+    end
+
+    private
+
+    def save_info!
       @user = existing_user || new_user
       @user.persisted? ? update_existing_user : create_new_user
     end
 
-    private
+    def create_tokens!
+      @tokens = ApiAuthentication::UserAuthenticator.new(user: user, request: request).auth
+    end
 
     def provider_data
       @provider_data ||= "#{SocialProviders.name}::#{provider.capitalize}".constantize.new(access_token).fetch_data

@@ -5,8 +5,6 @@ require 'rails_helper'
 describe 'Sessions', type: :request do
   let!(:user) { create(:user) }
 
-  # before { sign_in(user, ApiAuthentication::SessionsController) }
-
   before(:each) { @routes = ApiAuthentication::Engine.routes }
 
   describe '/sessions' do

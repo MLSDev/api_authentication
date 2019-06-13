@@ -19,7 +19,7 @@ describe ApiAuthentication::SocialProviders::Facebook do
         user_data = subject.fetch_data
 
         expect(user_data[:id]).to eq '118777242377720'
-        expect(user_data[:email]).to eq nil
+        expect(user_data[:email]).to eq 'open@graph.com'
         expect(user_data[:first_name]).to eq 'Open'
         expect(user_data[:last_name]).to eq 'User'
         expect(user_data[:username]).to eq 'Open Graph Test User'
