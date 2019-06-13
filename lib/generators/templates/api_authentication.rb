@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # These configuration options can be used to customise the behaviour of ApiAuthentication
 ApiAuthentication.configure do |config|
   #

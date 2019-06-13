@@ -6,4 +6,3 @@ module ApiAuthentication
     class FacebookError < StandardError; end
   end
 end
-

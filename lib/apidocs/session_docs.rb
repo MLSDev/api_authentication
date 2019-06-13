@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApiAuthentication
   class SessionDocs
     require 'swagger/blocks'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'api_authentication/configuration'
 require 'api_authentication/engine'
 require 'apidocs/session_docs'
@@ -24,7 +26,7 @@ module ApiAuthentication
 
   SWAGGER_CLASSES = [
     ::ApiAuthentication::SessionDocs
-  ]
+  ].freeze
 
   def self.configure(&block)
     block.call configuration

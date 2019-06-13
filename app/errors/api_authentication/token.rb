@@ -6,4 +6,3 @@ module ApiAuthentication
     class Invalid < StandardError; end
   end
 end
-

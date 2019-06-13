@@ -7,6 +7,8 @@ Documentation:
 LineLength:
   Enabled: true
   Max: 120
+  Exclude:
+    - spec/dummy/lib/tasks/dummy.rake
 Style/StringLiterals:
   EnforcedStyle: single_quotes
 Style/TrailingCommaInArguments:
@@ -28,10 +30,13 @@ Layout/EndOfLine:
   EnforcedStyle: lf
 Metrics/ClassLength:
   Enabled: true
+  Exclude:
+    - lib/apidocs/**/*
 Metrics/MethodLength:
   Enabled: true
   Exclude:
   - db/migrate/**/*
+  - spec/dummy/db/migrate/**/*
 Metrics/AbcSize:
   Enabled: true
   Exclude:
@@ -42,6 +47,7 @@ Metrics/BlockLength:
   Exclude:
   - spec/**/*
   - config/routes.rb
+  - lib/apidocs/**/*
 Style/TrailingCommaInArrayLiteral:
   Enabled: false
 Style/TrailingCommaInHashLiteral:

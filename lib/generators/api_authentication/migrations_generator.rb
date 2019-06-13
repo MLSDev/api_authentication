@@ -4,9 +4,9 @@ module ApiAuthentication
   module Generators
     class MigrationsGenerator < Rails::Generators::Base
       include Rails::Generators::Migration
-      source_root File.expand_path('../../templates', __FILE__)
+      source_root File.expand_path('../templates', __dir__)
 
-      def self.next_migration_number(path)
+      def self.next_migration_number(_path)
         @time ||= Time.now.utc
         @calls ||= -1
         @calls += 1
