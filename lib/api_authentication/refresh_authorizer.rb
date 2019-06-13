@@ -8,7 +8,7 @@ module ApiAuthentication
 
     def auth
       @token ||= ApiAuthentication.refresh_token_model.find_by(token: header_auth_finder.authorization)
-      return if @token.present? && !(@token.expired? || @token.revoked?)
+      return @token if @token.present? && !(@token.expired? || @token.revoked?)
 
       raise ApiAuthentication::Token::Invalid, I18n.t('api_authentication.errors.token.invalid')
     end

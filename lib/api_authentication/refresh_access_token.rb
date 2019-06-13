@@ -2,10 +2,10 @@
 
 module ApiAuthentication
   class RefreshAccessToken
-    attr_reader :headers, :tokens
+    attr_reader :request, :tokens
 
-    def initialize(headers)
-      @headers = headers
+    def initialize(request)
+      @request = request
     end
 
     def call
@@ -20,7 +20,7 @@ module ApiAuthentication
     end
 
     def create_new_tokens!
-      @tokens = ApiAuthentication::UserAuthenticator.new(user: refresh_token.user).auth
+      @tokens = ApiAuthentication::UserAuthenticator.new(user: refresh_token.user, request: request).auth
     end
 
     def revoke_refresh_token!

@@ -24,9 +24,31 @@ describe ApiAuthentication::RefreshAuthorizer do
     end
 
     context 'raises error' do
-      it do
+      it 'if token not found' do
         expect { subject.auth }.to raise_error(ApiAuthentication::Token::Invalid,
                                                I18n.t('api_authentication.errors.token.invalid'))
+      end
+
+      context 'for expired token' do
+        let!(:refresh_token) { create(:refresh_token, expired_at: DateTime.current) }
+
+        it do
+          expect(header_auth_finder).to receive(:authorization).and_return(refresh_token.token)
+
+          expect { subject.auth }.to raise_error(ApiAuthentication::Token::Invalid,
+                                                 I18n.t('api_authentication.errors.token.invalid'))
+        end
+      end
+
+      context 'for revoked token' do
+        let!(:refresh_token) { create(:refresh_token, revoked_at: DateTime.current) }
+
+        it do
+          expect(header_auth_finder).to receive(:authorization).and_return(refresh_token.token)
+
+          expect { subject.auth }.to raise_error(ApiAuthentication::Token::Invalid,
+                                                 I18n.t('api_authentication.errors.token.invalid'))
+        end
       end
     end
   end

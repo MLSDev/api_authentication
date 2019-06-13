@@ -15,7 +15,7 @@ module ApiAuthentication
     private
 
     def build_resource
-      @resource = ApiAuthentication::RefreshAccessToken.new(request.headers)
+      @resource = ApiAuthentication::RefreshAccessToken.new(request)
     end
   end
 end

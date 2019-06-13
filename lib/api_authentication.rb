@@ -5,6 +5,7 @@ require 'apidocs/session_docs'
 module ApiAuthentication
   autoload :HeaderAuthFinder, 'api_authentication/header_auth_finder'
   autoload :JsonWebToken, 'api_authentication/json_web_token'
+  autoload :RefreshAccessToken, 'api_authentication/refresh_access_token'
   autoload :RefreshAuthorizer, 'api_authentication/refresh_authorizer'
   autoload :RefreshTokenCreator, 'api_authentication/refresh_token_creator'
   autoload :RequestAuthorizer, 'api_authentication/request_authorizer'

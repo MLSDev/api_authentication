@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :refresh_token, class: ApiAuthentication.configuration.app_refresh_token_model_class_name do
+    user
     token { SecureRandom.hex(5) }
     expired_at { 1.hour.from_now }
     ip_address { FFaker::Internet.ip_v4_address }

@@ -38,6 +38,14 @@ describe ApiAuthentication::UserAuthenticator do
       expect(subject.user).to eq user
     end
 
+    context 'returns user from params' do
+      subject { described_class.new(user: user, request: request) }
+
+      it do
+        expect(subject.user).to eq user
+      end
+    end
+
     context 'raise error' do
       subject { described_class.new(email: user.email, password: user.password.reverse, request: request) }
 

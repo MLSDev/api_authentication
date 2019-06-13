@@ -14,7 +14,7 @@ module ApiAuthentication
     end
 
     def user
-      return if @user
+      return @user if @user
 
       @user = ApiAuthentication.user_model.find_by(email: email)
       return @user if @user&.authenticate(password)
