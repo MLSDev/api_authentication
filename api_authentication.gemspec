@@ -17,7 +17,6 @@ Gem::Specification.new do |s| # rubocop:disable Metrics/BlockLength
   s.add_dependency 'bcrypt'
   s.add_dependency 'draper'
   s.add_dependency 'jwt'
-  s.add_dependency 'swagger-blocks'
   s.add_development_dependency 'draper'
   s.add_development_dependency 'listen'
   # Databases

@@ -8,21 +8,11 @@ Only Rails `> 5` support.
 
 ## Installation
 
-Add these gems to your Gemfile
+Add gem to your Gemfile
 
 ``` ruby
 gem 'api_authentication', github: 'MLSDev/api_authentication', tag: 'LATEST_VERSION'
-
-gem 'geocoder'
-
-gem 'paperclip'
 ```
-
-Install ImageMagic
-
-```brew install imagemagick```
-
-...and run `bundle install` to install the gems.
 
 Next, run:
 
@@ -40,10 +30,8 @@ rails db:migrate
 Include module to Your `BaseController`:
 
 ```ruby
-include ApiAuthentication::ActsAsBaseControllerWithAuthentication
+include ApiAuthentication::RequestAuthorizeable
 ```
-
-then add to `.env` file `JWT_HMAC_SECRET` variable and assign some value to it
 
 then add the following to your routes.rb file:
 
@@ -67,21 +55,6 @@ session          PATCH  /session
                  POST   /session
                  DELETE /session
 facebook_session POST   /facebook/session
-```
-
-### SWAGGER
-
-Add in SWAGGERED_CLASSES array in api docs controller of project (if swagger gem is used in project)
-
-`ApiAuthentication::SWAGGER_CLASSES`
-
-And call on array `flatten` method like this
-
-```
-SWAGGERED_CLASSES = [
-    SomeClass,
-    ApiAuthentication::SWAGGER_CLASSES,
-  ].flatten.freeze
 ```
 
 ## About MLSDev

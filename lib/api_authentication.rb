@@ -2,7 +2,6 @@
 
 require 'api_authentication/configuration'
 require 'api_authentication/engine'
-require 'apidocs/session_docs'
 
 module ApiAuthentication
   autoload :HeaderAuthFinder, 'api_authentication/header_auth_finder'
@@ -23,10 +22,6 @@ module ApiAuthentication
   module SocialProviders
     autoload :Facebook, 'api_authentication/social_providers/facebook'
   end
-
-  SWAGGER_CLASSES = [
-    ::ApiAuthentication::SessionDocs
-  ].freeze
 
   def self.configure(&block)
     block.call configuration
