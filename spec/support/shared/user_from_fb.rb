@@ -10,7 +10,7 @@ shared_examples 'updating_existing_user_from_fb' do
     )
     old_email = user.email
 
-    subject.save!
+    subject.call
     user.reload
 
     expect(user.facebook_id).to eq provider_data[:id]

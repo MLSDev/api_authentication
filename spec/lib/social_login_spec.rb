@@ -8,8 +8,9 @@ describe ApiAuthentication::SocialLogin do
       let(:access_token) { SecureRandom.hex(5) }
       let(:facebook_id) { SecureRandom.hex(5) }
       let(:birthday) { Date.current - 18.years }
+      let(:request) { double(:request, remote_ip: FFaker::Internet.ip_v4_address, user_agent: 'test') }
 
-      subject { described_class.new(provider: :facebook, access_token: access_token) }
+      subject { described_class.new(provider: :facebook, access_token: access_token, request: request) }
 
       context 'existing user' do
         context 'update only facebook_id field' do
@@ -68,7 +69,7 @@ describe ApiAuthentication::SocialLogin do
               .and_return(provider_data),
           )
 
-          subject.save!
+          subject.call
 
           expect(subject.user.facebook_id).to eq provider_data[:id]
           expect(subject.user.email).to eq provider_data[:email]

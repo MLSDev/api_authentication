@@ -23,7 +23,7 @@ describe ApiAuthentication::SocialProviders::Facebook do
         expect(user_data[:first_name]).to eq 'Open'
         expect(user_data[:last_name]).to eq 'User'
         expect(user_data[:username]).to eq 'Open Graph Test User'
-        expect(user_data[:birthday]).to eq nil
+        expect(user_data[:birthday]).to eq '2000-01-01'
         expect(user_data[:avatar]).to eq 'https://platform-lookaside.fbsbx.com/platform/profilepic/'\
         '?asid=118777242377720&height=300&width=300&ext=1560697844&hash=AeRpefeAIAKYbriL'
       end
