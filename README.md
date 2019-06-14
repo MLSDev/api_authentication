@@ -50,13 +50,124 @@ It will generate routes like
 
 ```
 Routes for ApiAuthentication::Engine:
-session          PATCH  /session
-                 PUT    /session
-                 POST   /session
-                 DELETE /session
-facebook_session POST   /facebook/session
+    DELETE /push_tokens(.:format)
+    POST   /push_tokens(.:format)
+    POST   /registrations(.:format)
+    DELETE /sessions(.:format)
+    POST   /sessions(.:format)
+    POST   /access_tokens(.:format)
+    POST   /facebook/sessions(.:format)
 ```
 
+# Endpoints usage
+
+## POST /push_tokens
+
+### headers
+
+```json
+{
+  "Authorization": "Bearer access_token"
+}
+```
+
+### parameters
+
+```json
+{
+  "push_token": {
+    "token": "token",
+    "device_type": "android / ios"
+  }
+}
+```
+
+## DELETE /push_tokens
+
+### headers
+```json
+{
+  "Authorization": "Bearer access_token"
+}
+```
+
+### params
+```json
+{
+  "token": "push_token"
+}
+```
+
+## POST /registrations
+### params
+Depends on registration fields array
+```json
+{
+  "user_model_name": {
+    "email": "email",
+    "password": "password"
+  }
+}
+```
+
+## POST /sessions
+### params
+```json
+{
+  "session": {
+    "email": "email",
+    "password": "password"
+  }
+}
+``` 
+### response
+```json
+{
+  "access_token": "jwt token",
+  "refresh_token": "token"
+}
+```
+
+## DELETE /session
+### headers
+```json
+{
+  "Authorization": "Bearer refresh_token"
+}
+```
+
+## POST /access_token
+Refresh access token
+### headers
+```json
+{
+  "Authorization": "Bearer refresh_token"
+}
+```
+### response
+```json
+{
+  "access_token": "jwt token",
+  "refresh_token": "token"
+}
+```
+
+## POST /facebook/sessions
+### params
+```json
+{
+  "session": {
+    "access_token": "facebook access token"
+  }
+}
+``` 
+### response
+```json
+{
+  "access_token": "jwt token",
+  "refresh_token": "token"
+}
+```
 ## About MLSDev
 
 ![MLSdev][logo]
