@@ -8,12 +8,6 @@ ApiAuthentication.configure do |config|
   # config.controller_to_inherit_from = 'ActionController::Base'
 
   #
-  # => fields for registration
-  #
-  # config.registration_fields = %i[email first_name last_name username birthday]
-  #
-
-  #
   # => Enable Registrations endpoint
   #
   # config.registrations = true
@@ -33,9 +27,20 @@ ApiAuthentication.configure do |config|
   # config.facebook_login = true
 
   #
-  # => allow to set up in-app class name of user model
+  # => allow to set up in-app class name of users models
   #
-  # config.app_user_model_class_name = 'User'
+  # config.auth_models = [
+  #   {
+  #     model: 'User',
+  #     validation_fields: %i[email password first_name last_name username birthday],
+  #     registration_fields: %i[email password],
+  #     login_field: :email,
+  #     push_tokens: true,
+  #     refresh_tokens: true,
+  #     social_login: true,
+  #     facebook_registration_fields: %i[email password first_name last_name username birthday]
+  #   }
+  # ]
 
   #
   # => allow to set up in-app class name of refresh token model
@@ -46,11 +51,6 @@ ApiAuthentication.configure do |config|
   # => allow to set up in-app class name of push token model
   #
   # config.app_push_token_model_class_name = 'PushToken'
-
-  #
-  # => User model fields
-  #
-  # config.user_fields = %i[email first_name last_name username birthday]
 
   #
   # => secret_key

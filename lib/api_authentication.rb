@@ -54,6 +54,6 @@ module ApiAuthentication
   end
 
   def self.user_field_defined?(model, field)
-    user_model_params(model).fetch(:migration_fields).include?(field)
+    user_model_params(model).fetch(:validation_fields).include?(field)
   end
 end
