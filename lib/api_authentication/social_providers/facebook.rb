@@ -4,12 +4,12 @@ module ApiAuthentication
   module SocialProviders
     class Facebook
       BASE_URL = 'https://graph.facebook.com/me'
-      FIELDS = 'id,email,birthday,name,first_name,last_name,picture.width(300).height(300)'
 
       attr_reader :access_token
 
-      def initialize(access_token)
+      def initialize(access_token, fields)
         @access_token = access_token
+        @fields = fields
       end
 
       def fetch_data
@@ -24,11 +24,11 @@ module ApiAuthentication
       end
 
       def url
-        @url ||= URI("#{BASE_URL}?access_token=#{access_token}&fields=#{FIELDS}")
+        @url ||= URI("#{BASE_URL}?access_token=#{access_token}&fields=id,#{fields.join(',')}")
       end
 
       def check_error
-        raise ApiAuthentication::Auth::FacebookError, response['error'] if response['error']
+        raise ApiAuthentication::Errors::SocialLogin::FacebookError, response['error'] if response['error']
       end
 
       def user_data

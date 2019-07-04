@@ -30,7 +30,8 @@ module ApiAuthentication
     end
 
     def provider_data
-      @provider_data ||= "#{SocialProviders.name}::#{provider.capitalize}".constantize.new(access_token).fetch_data
+      @provider_data ||= "#{SocialProviders.name}::#{provider.capitalize}"
+        .constantize.new(access_token, registration_fields).fetch_data
     end
 
     def existing_user

@@ -2,7 +2,8 @@
 
 class CreateApiAuthUsers < ActiveRecord::Migration<%= "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]" %>
   def change
-    create_table :<%= ApiAuthentication.configuration.app_user_model_class_name.underscore.pluralize %> do |t|
+    <% ApiAuthentication.configuration.auth_models.each do |auth_model| %>
+    create_table :<%= auth_model[:model].underscore.pluralize %> do |t|
       t.string :email, null: false
       t.string :first_name, null: false
       t.string :last_name, null: false
@@ -11,6 +12,7 @@ class CreateApiAuthUsers < ActiveRecord::Migration<%= "[#{Rails::VERSION::MAJOR}
       t.date :birthday, null: false
     end
 
-    add_index :<%= ApiAuthentication.configuration.app_user_model_class_name.underscore.pluralize %>, :email, unique: true
+    add_index :<%= auth_model[:model].underscore.pluralize %>, :email, unique: true
+    <% end %>
   end
 end

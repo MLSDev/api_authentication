@@ -3,7 +3,11 @@
 class CreateApiAuthRefreshTokens < ActiveRecord::Migration<%= "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]" %>
   def change
     create_table :<%= ApiAuthentication.configuration.app_refresh_token_model_class_name.underscore.pluralize %> do |t|
+      <% if ApiAuthentication.configuration.auth_models.count > 1 %>
+      t.references :user, index: true, polymorphic: true
+      <% else %>
       t.references :user, index: true, foreign_key: { to_table: :<%= ApiAuthentication.configuration.app_user_model_class_name.underscore.pluralize %> }
+      <% end %>
       t.string :token, null: false, default: ''
       t.datetime :expired_at, null: false
       t.datetime :revoked_at

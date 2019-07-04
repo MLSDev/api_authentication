@@ -38,7 +38,7 @@ module ApiAuthentication
   end
 
   def self.user_model_params(user_model)
-    configuration.auth_models.select { |auth_model| auth_model[:model] == user_model.name }
+    configuration.auth_models.find { |auth_model| auth_model[:model] == user_model.name }
   end
 
   def self.user_model
@@ -53,7 +53,7 @@ module ApiAuthentication
     configuration.app_push_token_model_class_name.constantize
   end
 
-  def self.user_field_defined?(field)
-    configuration.user_fields.include?(field)
+  def self.user_field_defined?(model, field)
+    user_model_params(model).fetch(:migration_fields).include?(field)
   end
 end

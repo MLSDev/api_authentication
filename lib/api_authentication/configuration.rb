@@ -10,11 +10,6 @@ module ApiAuthentication
     config_accessor(:controller_to_inherit_from) { 'ActionController::Base' }
 
     #
-    # => fields for registration
-    #
-    config_accessor(:registration_fields) { %i[email password first_name last_name username birthday] }
-
-    #
     # => Enable Registrations endpoint
     #
     config_accessor(:registrations) { true }
@@ -35,9 +30,22 @@ module ApiAuthentication
     config_accessor(:facebook_login) { true }
 
     #
-    # => allow to set up in-app class name of user model
+    # => allow to set up in-app class name of users models
     #
-    config_accessor(:app_user_model_class_name) { 'User' }
+    config_accessor(:auth_models) do
+      [
+        {
+          model: 'User',
+          migration_fields: %i[email password first_name last_name username birthday],
+          registration_fields: %i[email password],
+          login_field: :email,
+          push_tokens: true,
+          refresh_tokens: true,
+          social_login: true,
+          facebook_registration_fields: %i[email password first_name last_name username birthday]
+        }
+      ]
+    end
 
     #
     # => allow to set up in-app class name of refresh token model
@@ -48,11 +56,6 @@ module ApiAuthentication
     # => allow to set up in-app class name of push token model
     #
     config_accessor(:app_push_token_model_class_name) { 'PushToken' }
-
-    #
-    # => User model fields
-    #
-    config_accessor(:user_fields) { %i[email password first_name last_name username birthday] }
 
     #
     # => secret_key
@@ -67,20 +70,5 @@ module ApiAuthentication
     config_accessor(:refresh_tokens) { true }
 
     config_accessor(:refresh_token_exp) { 1.month }
-
-    config_accessor(:auth_models) do
-      [
-        {
-          model: 'User',
-          migration_fields: %i[email password first_name last_name username birthday],
-          registration_fields: %i[email password],
-          facebook_registration_fields: %i[email password first_name last_name username birthday],
-          login_field: :email,
-          push_tokens: true,
-          refresh_tokens: true,
-          social_login: true
-        },
-      ]
-    end
   end
 end
