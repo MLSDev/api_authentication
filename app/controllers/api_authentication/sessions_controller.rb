@@ -12,7 +12,7 @@ module ApiAuthentication
     private
 
     def build_resource
-      @resource = ::ApiAuthentication::UserAuthenticator.new(resource_params.merge(request: request))
+      @resource = ::ApiAuthentication::UserAuthenticator.new(resource_params)
     end
 
     def resource
@@ -20,7 +20,9 @@ module ApiAuthentication
     end
 
     def resource_params
-      params.require(:session).permit(:email, :password)
+      permitted = params.require(:session).permit(:login, :password)
+      permitted[:request] = request
+      permitted[:user_model] = auth_user_model
     end
   end
 end

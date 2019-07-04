@@ -8,13 +8,13 @@ module ApiAuthentication
     private
 
     def build_resource
-      @resource = ApiAuthentication.user_model.new(resource_params)
+      @resource = auth_user_model.new(resource_params)
     end
 
     def resource_params
       params
-        .require(ApiAuthentication.user_model.name.downcase)
-        .permit(ApiAuthentication.configuration.registration_fields)
+        .require(auth_user_model.name.downcase)
+        .permit(ApiAuthentication.user_model_params(auth_user_model).fetch(:registration_fields))
     end
   end
 end

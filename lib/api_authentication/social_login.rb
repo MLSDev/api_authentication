@@ -2,15 +2,18 @@
 
 module ApiAuthentication
   class SocialLogin
-    attr_reader :provider, :access_token, :user, :tokens, :request
+    attr_reader :provider, :access_token, :user, :tokens, :request, :user_model
 
     def initialize(params)
       @provider = params[:provider]
       @access_token = params[:access_token]
       @request = params[:request]
+      @user_model = params[:user_model]
     end
 
     def call
+      raise ApiAuthentication::Errors::SocialLogin::NotAllowed unless social_login_allowed?
+
       save_info!
       create_tokens!
     end
@@ -31,12 +34,12 @@ module ApiAuthentication
     end
 
     def existing_user
-      @existing_user ||= ApiAuthentication.user_model.find_by("#{provider}_id": provider_data[:id])
-      @existing_user ||= ApiAuthentication.user_model.find_by(email: provider_data[:email]) if provider_data[:email]
+      @existing_user ||= user_model.find_by("#{provider}_id": provider_data[:id])
+      @existing_user ||= user_model.find_by(email: provider_data[:email]) if provider_data[:email]
     end
 
     def new_user
-      ApiAuthentication.user_model.new("#{provider}_id": provider_data[:id], password: SecureRandom.uuid)
+      user_model.new("#{provider}_id": provider_data[:id], password: SecureRandom.uuid)
     end
 
     def update_existing_user
@@ -52,7 +55,15 @@ module ApiAuthentication
     end
 
     def registration_fields
-      ApiAuthentication.configuration.registration_fields.reject { |f| f == :password }
+      user_model_params.fetch("#{provider}_registration_fields").reject { |f| f == :password }
+    end
+
+    def user_model_params
+      @user_model_params ||= ApiAuthentication.user_model_params(user_model)
+    end
+
+    def social_login_allowed?
+      user_model_params.fetch(:social_login)
     end
   end
 end

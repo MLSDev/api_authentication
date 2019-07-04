@@ -8,8 +8,7 @@ module ApiAuthentication
     end
 
     def create
-      ApiAuthentication.refresh_token_model.create!(
-        user_id: user.id,
+      user.refresh_tokens.create!(
         token: ApiAuthentication.refresh_token_model.generate_token,
         expired_at: ApiAuthentication.configuration.refresh_token_exp.from_now,
         ip_address: request.remote_ip,

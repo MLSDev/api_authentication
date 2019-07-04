@@ -67,5 +67,20 @@ module ApiAuthentication
     config_accessor(:refresh_tokens) { true }
 
     config_accessor(:refresh_token_exp) { 1.month }
+
+    config_accessor(:auth_models) do
+      [
+        {
+          model: 'User',
+          migration_fields: %i[email password first_name last_name username birthday],
+          registration_fields: %i[email password],
+          facebook_registration_fields: %i[email password first_name last_name username birthday],
+          login_field: :email,
+          push_tokens: true,
+          refresh_tokens: true,
+          social_login: true
+        },
+      ]
+    end
   end
 end

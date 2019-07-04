@@ -15,7 +15,7 @@ module ApiAuthentication
       body = JWT.decode(token, HMAC_SECRET)[0]
       HashWithIndifferentAccess.new(body)
     rescue JWT::DecodeError => e
-      raise ApiAuthentication::Token::Invalid, e.message
+      raise ApiAuthentication::Errors::Token::Invalid, e.message
     end
   end
 end

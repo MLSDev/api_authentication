@@ -9,7 +9,7 @@ module ApiAuthentication
     def authorization
       return headers['Authorization'].split(' ').last if headers['Authorization'].present?
 
-      raise ApiAuthentication::Token::Missing, I18n.t('api_authentication.errors.token.missing')
+      raise ApiAuthentication::Errors::Token::Missing, I18n.t('api_authentication.errors.token.missing')
     end
 
     private

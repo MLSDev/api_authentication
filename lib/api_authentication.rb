@@ -23,12 +23,22 @@ module ApiAuthentication
     autoload :Facebook, 'api_authentication/social_providers/facebook'
   end
 
+  module Errors
+    autoload :Auth, 'api_authentication/errors/auth'
+    autoload :SocialLogin, 'api_authentication/errors/social_login'
+    autoload :Token, 'api_authentication/errors/token'
+  end
+
   def self.configure(&block)
     block.call configuration
   end
 
   def self.configuration
     @configuration ||= Configuration.new
+  end
+
+  def self.user_model_params(user_model)
+    configuration.auth_models.select { |auth_model| auth_model[:model] == user_model.name }
   end
 
   def self.user_model
