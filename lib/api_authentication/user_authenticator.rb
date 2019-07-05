@@ -28,7 +28,7 @@ module ApiAuthentication
     attr_reader :user_model, :login, :password, :request
 
     def access_token_payload
-      { user_id: user.id, user_model: user_model }
+      { user_id: user.id, user_model: user_model.name }
     end
 
     def refresh_token

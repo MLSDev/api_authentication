@@ -5,12 +5,16 @@ require 'rails_helper'
 describe ApiAuthentication::SocialLogin do
   describe '#save!' do
     context 'facebook' do
+      let(:user) { build(:user) }
       let(:access_token) { SecureRandom.hex(5) }
       let(:facebook_id) { SecureRandom.hex(5) }
       let(:birthday) { Date.current - 18.years }
       let(:request) { double(:request, remote_ip: FFaker::Internet.ip_v4_address, user_agent: 'test') }
 
-      subject { described_class.new(provider: :facebook, access_token: access_token, request: request) }
+      subject do
+        described_class.new(user_model: user.class, provider: :facebook, access_token: access_token,
+                            request: request)
+      end
 
       context 'existing user' do
         context 'update only facebook_id field' do

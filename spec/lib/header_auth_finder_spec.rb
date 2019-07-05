@@ -18,7 +18,7 @@ describe ApiAuthentication::HeaderAuthFinder do
       subject { described_class.new({}) }
 
       it 'raises error' do
-        expect { subject.authorization }.to raise_error(ApiAuthentication::Token::Missing,
+        expect { subject.authorization }.to raise_error(ApiAuthentication::Errors::Token::Missing,
                                                         I18n.t('api_authentication.errors.token.missing'))
       end
     end

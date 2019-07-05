@@ -56,7 +56,7 @@ module ApiAuthentication
     end
 
     def registration_fields
-      user_model_params.fetch("#{provider}_registration_fields").reject { |f| f == :password }
+      user_model_params.fetch(:"#{provider}_registration_fields").reject { |f| f == :password }
     end
 
     def user_model_params

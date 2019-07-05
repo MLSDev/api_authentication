@@ -6,10 +6,10 @@ describe ApiAuthentication::UserAuthenticator do
   let(:user) { create(:user) }
   let(:request) { {} }
 
-  subject { described_class.new(email: user.email, password: user.password, request: request) }
+  subject { described_class.new(user_model: user.class, login: user.email, password: user.password, request: request) }
 
   describe '#auth' do
-    let(:access_token_payload) { { user_id: user.id } }
+    let(:access_token_payload) { { user_id: user.id, user_model: user.class.name } }
     let(:access_token) { 'access_token' }
     let(:refresh_token) { double(:refresh_token, token: 'refresh_token') }
     let(:refresh_token_creator) { double(:refresh_token_creator, create: refresh_token) }
@@ -47,10 +47,10 @@ describe ApiAuthentication::UserAuthenticator do
     end
 
     context 'raise error' do
-      subject { described_class.new(email: user.email, password: user.password.reverse, request: request) }
+      subject { described_class.new(user_model: user.class, login: user.email, password: user.password.reverse, request: request) }
 
       it do
-        expect { subject.user }.to raise_error(ApiAuthentication::Auth::InvalidCredentials,
+        expect { subject.user }.to raise_error(ApiAuthentication::Errors::Auth::InvalidCredentials,
                                                I18n.t('api_authentication.errors.auth.invalid_credentials'))
       end
     end

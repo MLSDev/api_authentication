@@ -21,7 +21,7 @@ module ApiAuthentication
     end
 
     def user_model
-      @user_model ||= header_auth_finder.fetch(:user_model).constantize
+      @user_model ||= decoded_auth_token.fetch(:user_model).constantize
     end
   end
 end

@@ -4,8 +4,16 @@ module ApiAuthentication
   module SocialProviders
     class Facebook
       BASE_URL = 'https://graph.facebook.com/me'
+      FIELDS_EQUALITY = {
+        email: :email,
+        first_name: :first_name,
+        last_name: :last_name,
+        username: :name,
+        birthday: :birthday,
+        avatar: 'picture.width(300).height(300)'
+      }.freeze
 
-      attr_reader :access_token
+      attr_reader :access_token, :fields
 
       def initialize(access_token, fields)
         @access_token = access_token
@@ -24,7 +32,7 @@ module ApiAuthentication
       end
 
       def url
-        @url ||= URI("#{BASE_URL}?access_token=#{access_token}&fields=id,#{fields.join(',')}")
+        @url ||= URI("#{BASE_URL}?access_token=#{access_token}&fields=#{fetch_fields}")
       end
 
       def check_error
@@ -41,6 +49,10 @@ module ApiAuthentication
           birthday: response['birthday'],
           avatar: response.dig('picture', 'data', 'url')
         }
+      end
+
+      def fetch_fields
+        ([:id] + fields.map { |f| FIELDS_EQUALITY[f] }).join(',')
       end
     end
   end
