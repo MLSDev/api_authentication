@@ -2,7 +2,9 @@
 
 shared_examples 'api_auth_refresh_token' do
   context 'relations' do
-    it { should belong_to(ApiAuthentication.configuration.app_user_model_class_name.downcase.to_sym) }
+    it do
+      should belong_to(:user).class_name(ApiAuthentication.configuration.auth_models.first.fetch(:model))
+    end
   end
 
   context 'validations' do

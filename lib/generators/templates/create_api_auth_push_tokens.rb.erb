@@ -6,7 +6,7 @@ class CreateApiAuthPushTokens < ActiveRecord::Migration<%= "[#{Rails::VERSION::M
       <% if ApiAuthentication.configuration.auth_models.count > 1 %>
       t.references :user, index: true, polymorphic: true
       <% else %>
-      t.references :user, index: true, foreign_key: { to_table: :<%= ApiAuthentication.configuration.app_user_model_class_name.underscore.pluralize %> }
+      t.references :user, index: true, foreign_key: { to_table: :<%= ApiAuthentication.configuration.auth_models.first.fetch(:model).underscore.pluralize %> }
       <% end %>
       t.string :token, null: false, default: ''
       t.integer :device_type, null: false, default: 0

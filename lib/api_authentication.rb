@@ -41,10 +41,6 @@ module ApiAuthentication
     configuration.auth_models.find { |auth_model| auth_model[:model] == user_model.name }
   end
 
-  def self.user_model
-    configuration.app_user_model_class_name.constantize
-  end
-
   def self.refresh_token_model
     configuration.app_refresh_token_model_class_name.constantize
   end

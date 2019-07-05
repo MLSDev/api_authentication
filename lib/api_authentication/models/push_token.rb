@@ -10,8 +10,7 @@ module ApiAuthentication
                    if ApiAuthentication.configuration.auth_models.count > 1
                      { polymorphic: true }
                    else
-                     { class_name: ApiAuthentication.configuration.auth_models
-                       .first[:model].underscore.downcase.to_sym }
+                     { class_name: ApiAuthentication.configuration.auth_models.first[:model] }
                    end
 
         validates :token, presence: true
