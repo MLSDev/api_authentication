@@ -47,7 +47,10 @@ describe ApiAuthentication::UserAuthenticator do
     end
 
     context 'raise error' do
-      subject { described_class.new(user_model: user.class, login: user.email, password: user.password.reverse, request: request) }
+      subject do
+        described_class.new(user_model: user.class, login: user.email,
+                            password: user.password.reverse, request: request)
+      end
 
       it do
         expect { subject.user }.to raise_error(ApiAuthentication::Errors::Auth::InvalidCredentials,

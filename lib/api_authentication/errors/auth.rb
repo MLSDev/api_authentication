@@ -7,4 +7,3 @@ module ApiAuthentication
     end
   end
 end
-

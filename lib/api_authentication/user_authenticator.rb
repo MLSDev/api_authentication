@@ -20,7 +20,8 @@ module ApiAuthentication
       @user = user_model.find_by(login_field => login)
       return @user if @user&.authenticate(password)
 
-      raise ApiAuthentication::Errors::Auth::InvalidCredentials, I18n.t('api_authentication.errors.auth.invalid_credentials')
+      raise ApiAuthentication::Errors::Auth::InvalidCredentials,
+            I18n.t('api_authentication.errors.auth.invalid_credentials')
     end
 
     private
