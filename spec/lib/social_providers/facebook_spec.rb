@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe ApiAuthentication::SocialProviders::Facebook do
   describe '#fetch_data' do
-    let(:fields) { %i[email first_name last_name username birthday avatar] }
+    let(:fields) { %i[email first_name last_name username birthday] }
 
     context 'return user data' do
       let(:access_token) do
@@ -26,8 +26,7 @@ describe ApiAuthentication::SocialProviders::Facebook do
         expect(user_data[:last_name]).to eq 'User'
         expect(user_data[:username]).to eq 'Open Graph Test User'
         expect(user_data[:birthday]).to eq '2000-01-01'
-        expect(user_data[:avatar]).to eq 'https://platform-lookaside.fbsbx.com/platform/profilepic/'\
-        '?asid=118777242377720&height=300&width=300&ext=1560697844&hash=AeRpefeAIAKYbriL'
+        expect(user_data[:avatar]).to eq nil
       end
 
       after { VCR.eject_cassette }

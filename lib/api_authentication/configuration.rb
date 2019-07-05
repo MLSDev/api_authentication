@@ -36,8 +36,7 @@ module ApiAuthentication
       [
         {
           model: 'User',
-          validation_fields: %i[email password first_name last_name username birthday],
-          registration_fields: %i[email password],
+          registration_fields: %i[email password first_name last_name username birthday],
           login_field: :email,
           push_tokens: true,
           refresh_tokens: true,

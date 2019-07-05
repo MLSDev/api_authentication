@@ -23,6 +23,7 @@ module ApiAuthentication
       permitted = params.require(:session).permit(:login, :password)
       permitted[:request] = request
       permitted[:user_model] = auth_user_model
+      permitted
     end
   end
 end
