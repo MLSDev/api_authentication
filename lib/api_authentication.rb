@@ -23,6 +23,12 @@ module ApiAuthentication
     autoload :Facebook, 'api_authentication/social_providers/facebook'
   end
 
+  module Errors
+    autoload :Auth, 'api_authentication/errors/auth'
+    autoload :SocialLogin, 'api_authentication/errors/social_login'
+    autoload :Token, 'api_authentication/errors/token'
+  end
+
   def self.configure(&block)
     block.call configuration
   end
@@ -31,8 +37,8 @@ module ApiAuthentication
     @configuration ||= Configuration.new
   end
 
-  def self.user_model
-    configuration.app_user_model_class_name.constantize
+  def self.user_model_params(user_model)
+    configuration.auth_models.find { |auth_model| auth_model[:model] == user_model.name }
   end
 
   def self.refresh_token_model
@@ -43,7 +49,7 @@ module ApiAuthentication
     configuration.app_push_token_model_class_name.constantize
   end
 
-  def self.user_field_defined?(field)
-    configuration.user_fields.include?(field)
+  def self.user_field_defined?(model, field)
+    user_model_params(model).fetch(:registration_fields).include?(field)
   end
 end

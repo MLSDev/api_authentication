@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://graph.facebook.com/me?access_token=EAATNbOL45KkBAAGKdGYTjgjyJ3y75jKAZAhAZCBhgL659bYsNHAabSc4HCyQeAXZAF5uWgfOtylAuYAIvZCgj7ZAxDwhFAqZCSroCZChxDjosM3S1kqu2Lg8FAqGblWXb5bGI9JvhpjfgywVDnFblIu9M2U3d5ZCYiioE6VLszIfLkIQHHU3nszQliqj8nDE7v8ds3nrLGzmWQZDZD&fields=id,email,birthday,name,first_name,last_name,picture.width(300).height(300)
+    uri: https://graph.facebook.com/me?access_token=EAATNbOL45KkBAAGKdGYTjgjyJ3y75jKAZAhAZCBhgL659bYsNHAabSc4HCyQeAXZAF5uWgfOtylAuYAIvZCgj7ZAxDwhFAqZCSroCZChxDjosM3S1kqu2Lg8FAqGblWXb5bGI9JvhpjfgywVDnFblIu9M2U3d5ZCYiioE6VLszIfLkIQHHU3nszQliqj8nDE7v8ds3nrLGzmWQZDZD&fields=id,email,first_name,last_name,name,birthday
     body:
       encoding: US-ASCII
       string: ''
@@ -56,7 +56,7 @@ http_interactions:
       - '241'
     body:
       encoding: ASCII-8BIT
-      string: '{"id":"118777242377720","email":"open@graph.com","birthday":"2000-01-01","name":"Open Graph Test User","first_name":"Open","last_name":"User","picture":{"data":{"height":320,"is_silhouette":true,"url":"https:\/\/platform-lookaside.fbsbx.com\/platform\/profilepic\/?asid=118777242377720&height=300&width=300&ext=1560697844&hash=AeRpefeAIAKYbriL","width":320}}}'
+      string: '{"id":"118777242377720","email":"open@graph.com","birthday":"2000-01-01","name":"Open Graph Test User","first_name":"Open","last_name":"User"}'
     http_version: 
   recorded_at: Fri, 17 May 2019 15:10:44 GMT
 recorded_with: VCR 4.0.0

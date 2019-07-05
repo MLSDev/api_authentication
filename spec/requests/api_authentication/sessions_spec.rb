@@ -15,7 +15,7 @@ describe 'Sessions', type: :request do
       post sessions_path(format: :json),
            params: {
              session: {
-               email: user.email,
+               login: user.email,
                password: user.password
              }
            },

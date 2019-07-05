@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :user, class: ApiAuthentication.configuration.app_user_model_class_name do
+  factory :user, class: ApiAuthentication.configuration.auth_models.first.fetch(:model) do
     email { FFaker::Internet.email }
     first_name { FFaker::Name.first_name }
     last_name { FFaker::Name.last_name }

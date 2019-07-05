@@ -37,7 +37,7 @@ describe ApiAuthentication::JsonWebToken do
     end
 
     it 'raises error' do
-      expect { described_class.decode('token') }.to raise_error(ApiAuthentication::Token::Invalid)
+      expect { described_class.decode('token') }.to raise_error(ApiAuthentication::Errors::Token::Invalid)
     end
   end
 end

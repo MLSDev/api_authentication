@@ -4,6 +4,8 @@ require 'rails_helper'
 
 describe ApiAuthentication::SocialProviders::Facebook do
   describe '#fetch_data' do
+    let(:fields) { %i[email first_name last_name username birthday] }
+
     context 'return user data' do
       let(:access_token) do
         'EAATNbOL45KkBAAGKdGYTjgjyJ3y75jKAZAhAZCBhgL659bYsNHAabSc4HCyQe'\
@@ -11,7 +13,7 @@ describe ApiAuthentication::SocialProviders::Facebook do
         'JvhpjfgywVDnFblIu9M2U3d5ZCYiioE6VLszIfLkIQHHU3nszQliqj8nDE7v8ds3nrLGzmWQZDZD'
       end
 
-      subject { described_class.new(access_token) }
+      subject { described_class.new(access_token, fields) }
 
       before { VCR.insert_cassette 'facebook/me_success' }
 
@@ -24,20 +26,19 @@ describe ApiAuthentication::SocialProviders::Facebook do
         expect(user_data[:last_name]).to eq 'User'
         expect(user_data[:username]).to eq 'Open Graph Test User'
         expect(user_data[:birthday]).to eq '2000-01-01'
-        expect(user_data[:avatar]).to eq 'https://platform-lookaside.fbsbx.com/platform/profilepic/'\
-        '?asid=118777242377720&height=300&width=300&ext=1560697844&hash=AeRpefeAIAKYbriL'
+        expect(user_data[:avatar]).to eq nil
       end
 
       after { VCR.eject_cassette }
     end
 
     context 'raise error' do
-      subject { described_class.new('token') }
+      subject { described_class.new('token', fields) }
 
       before { VCR.insert_cassette 'facebook/me_error' }
 
       it do
-        expect { subject.fetch_data }.to raise_error ApiAuthentication::Auth::FacebookError
+        expect { subject.fetch_data }.to raise_error ApiAuthentication::Errors::SocialLogin::FacebookError
       end
 
       after { VCR.eject_cassette }

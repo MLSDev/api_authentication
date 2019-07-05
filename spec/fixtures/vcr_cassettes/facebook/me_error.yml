@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://graph.facebook.com/me?access_token=token&fields=id,email,birthday,name,first_name,last_name,picture.width(300).height(300)
+    uri: https://graph.facebook.com/me?access_token=token&fields=id,email,first_name,last_name,name,birthday
     body:
       encoding: US-ASCII
       string: ''

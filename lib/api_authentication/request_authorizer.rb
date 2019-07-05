@@ -2,14 +2,14 @@
 
 module ApiAuthentication
   class RequestAuthorizer
-    def initialize(headers = {})
+    def initialize(headers)
       @header_auth_finder = HeaderAuthFinder.new(headers)
     end
 
     def auth
-      @user ||= ApiAuthentication.user_model.find_by!(id: decoded_auth_token[:user_id])
+      @user ||= user_model.find_by!(id: decoded_auth_token.fetch(:user_id))
     rescue ActiveRecord::RecordNotFound => _e
-      raise ApiAuthentication::Token::Invalid, I18n.t('api_authentication.errors.token.invalid')
+      raise ApiAuthentication::Errors::Token::Invalid, I18n.t('api_authentication.errors.token.invalid')
     end
 
     private
@@ -18,6 +18,10 @@ module ApiAuthentication
 
     def decoded_auth_token
       @decoded_auth_token ||= JsonWebToken.decode(header_auth_finder.authorization)
+    end
+
+    def user_model
+      @user_model ||= decoded_auth_token.fetch(:user_model).constantize
     end
   end
 end

@@ -6,7 +6,12 @@ module ApiAuthentication
       extend ActiveSupport::Concern
 
       included do
-        belongs_to ApiAuthentication.configuration.app_user_model_class_name.downcase.to_sym
+        belongs_to :user,
+                   if ApiAuthentication.configuration.auth_models.count > 1
+                     { polymorphic: true }
+                   else
+                     { class_name: ApiAuthentication.configuration.auth_models.first[:model] }
+                   end
 
         validates :token, presence: true
 

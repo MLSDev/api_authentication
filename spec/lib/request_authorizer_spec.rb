@@ -15,7 +15,7 @@ describe ApiAuthentication::RequestAuthorizer do
 
     context 'authorize user' do
       let(:user) { create(:user) }
-      let(:decoded_auth_token) { { user_id: user.id } }
+      let(:decoded_auth_token) { { user_id: user.id, user_model: user.class.name } }
 
       it do
         expect(ApiAuthentication::JsonWebToken).to receive(:decode)
@@ -27,12 +27,14 @@ describe ApiAuthentication::RequestAuthorizer do
     end
 
     context 'raises error' do
+      let(:user) { build(:user) }
+
       it do
         expect(ApiAuthentication::JsonWebToken).to receive(:decode)
           .with(header_auth_finder.authorization)
-          .and_return(user_id: 1)
+          .and_return(user_id: 1, user_model: user.class.name)
 
-        expect { subject.auth }.to raise_error(ApiAuthentication::Token::Invalid,
+        expect { subject.auth }.to raise_error(ApiAuthentication::Errors::Token::Invalid,
                                                I18n.t('api_authentication.errors.token.invalid'))
       end
     end
