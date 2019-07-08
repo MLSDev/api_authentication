@@ -1,4 +1,6 @@
-appraise "rails-head" do
+# frozen_string_literal: true
+
+appraise 'rails-head' do
   gem 'rails', github: 'rails/rails'
 end
 

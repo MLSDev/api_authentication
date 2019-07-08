@@ -1,0 +1,62 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/me?access_token=EAATNbOL45KkBAAGKdGYTjgjyJ3y75jKAZAhAZCBhgL659bYsNHAabSc4HCyQeAXZAF5uWgfOtylAuYAIvZCgj7ZAxDwhFAqZCSroCZChxDjosM3S1kqu2Lg8FAqGblWXb5bGI9JvhpjfgywVDnFblIu9M2U3d5ZCYiioE6VLszIfLkIQHHU3nszQliqj8nDE7v8ds3nrLGzmWQZDZD&fields=id,email,first_name,last_name,name,birthday
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - graph.facebook.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Vary:
+      - Accept-Encoding
+      Etag:
+      - '"51a81a3f2bc7d24453cba37b1c13b136a23729f9"'
+      X-App-Usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Facebook-Api-Version:
+      - v3.0
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      Pragma:
+      - no-cache
+      X-Fb-Rev:
+      - '1000725369'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      X-Fb-Trace-Id:
+      - CzorvRbPaP0
+      X-Fb-Request-Id:
+      - AoAYw31JDyyJUA8Q4T-GmSw
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Debug:
+      - wycyChich5wd2i2zFIf2DebeOqFvGHc5BEf/m0F7akJHgudlppjBIuWZ/OTqP6DQwOQF7kwdeMX+SVN1uUn/3A==
+      Date:
+      - Fri, 17 May 2019 15:10:44 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '241'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"118777242377720","email":"open@graph.com","birthday":"2000-01-01","name":"Open Graph Test User","first_name":"Open","last_name":"User"}'
+    http_version: 
+  recorded_at: Fri, 17 May 2019 15:10:44 GMT
+recorded_with: VCR 4.0.0

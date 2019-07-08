@@ -1,39 +1,66 @@
+# frozen_string_literal: true
+
 # These configuration options can be used to customise the behaviour of ApiAuthentication
 ApiAuthentication.configure do |config|
-    #
-    # => Controller that should be inherited by engine ApplicationController, default is 'ActionController::Base'
-    #
-    # config.controller_to_inherit_from = 'ActionController::Base'
+  #
+  # => Controller that should be inherited by engine ApplicationController, default is 'ActionController::Base'
+  #
+  # config.controller_to_inherit_from = 'ActionController::Base'
 
-    #
-    # => Table name of User model, default is `users`
-    #
-    # config.users_table_name =  'users'
+  #
+  # => Enable Registrations endpoint
+  #
+  # config.registrations = true
 
-    #
-    # => add fields to users table
-    #
-    # config.add_first_name_field =  true
+  #
+  # => Enable Push Tokens endpoint
+  #
+  # config.push_tokens = true
 
-    # config.add_last_name_field =  true
+  #
+  # => Enable Sessions endpoint
+  #
+  # config.sessions = true
 
-    # config.add_full_name_field =  true
+  # => add login from social_networks
+  #
+  # config.facebook_login = true
 
-    # config.add_username_field =  true
+  #
+  # => allow to set up in-app class name of users models
+  #
+  # config.auth_models = [
+  #   {
+  #     model: 'User',
+  #     validation_fields: %i[email password first_name last_name username birthday],
+  #     registration_fields: %i[email password],
+  #     login_field: :email,
+  #     push_tokens: true,
+  #     refresh_tokens: true,
+  #     social_login: true,
+  #     facebook_registration_fields: %i[email password first_name last_name username birthday]
+  #   }
+  # ]
 
-    # config.add_avatar_fields =  true # Set to false if you have avatar fields for multipart upload photo
+  #
+  # => allow to set up in-app class name of refresh token model
+  #
+  # config.app_refresh_token_model_class_name = 'RefreshToken'
 
-    # config.pull_variables_from_facebook = ['avatar', 'first_name', 'last_name', 'username', 'full_name', 'birthday']
+  #
+  # => allow to set up in-app class name of push token model
+  #
+  # config.app_push_token_model_class_name = 'PushToken'
 
-    #
-    # => add login from social_networks
-    #
-    # config.include_facebook_login = true
+  #
+  # => secret_key
+  #
+  # config.secret_key = 'key'
 
-    #
-    # => allow to set up in-app class name of user model
-    #
-    # config.app_user_model_class_name = 'User'
-
-    # config.handle_users_is_blocked = false
+  #
+  # => JWT token expiration
+  #
+  # config.jwt_token_exp = 1.hour.from_now
+  # config.refresh_tokens = true
+  # config.refresh_token_exp = 1.month.from_now
 end

@@ -6,6 +6,7 @@ pkg/
 tmp/**/*
 # due to Could not find rake-* in any of the sources
 Gemfile.lock
+.idea/
 
 spec/dummy/tmp/**/*
 

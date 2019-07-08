@@ -1,0 +1,21 @@
+# frozen_string_literal: true
+
+class CreateApiAuthUsers < ActiveRecord::Migration<%= "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]" %>
+  def change
+    <% ApiAuthentication.configuration.auth_models.each do |auth_model| %>
+    create_table :<%= auth_model[:model].underscore.pluralize %> do |t|
+      t.string :email, null: false
+      t.string :first_name, null: false
+      t.string :last_name, null: false
+      t.string :password_digest, null: false
+      t.string :username, null: false
+      t.date :birthday, null: false
+    <% if auth_model[:social_login] %>
+      t.string :facebook_id
+    <% end %>
+    end
+
+    add_index :<%= auth_model[:model].underscore.pluralize %>, :email, unique: true
+    <% end %>
+  end
+end

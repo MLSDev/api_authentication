@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Be sure to restart your server when you modify this file.
 #
 # This file contains settings for ActionController::ParamsWrapper which
@@ -7,6 +9,4 @@
 ActionController::Base.wrap_parameters format: [:json]
 
 # Disable root element in JSON by default.
-if defined?(ActiveRecord)
-  ActiveRecord::Base.include_root_in_json = false
-end
+ActiveRecord::Base.include_root_in_json = false if defined?(ActiveRecord)

@@ -8,21 +8,11 @@ Only Rails `> 5` support.
 
 ## Installation
 
-Add these gems to your Gemfile
+Add gem to your Gemfile
 
 ``` ruby
 gem 'api_authentication', github: 'MLSDev/api_authentication', tag: 'LATEST_VERSION'
-
-gem 'geocoder'
-
-gem 'paperclip'
 ```
-
-Install ImageMagic
-
-```brew install imagemagick```
-
-...and run `bundle install` to install the gems.
 
 Next, run:
 
@@ -40,10 +30,8 @@ rails db:migrate
 Include module to Your `BaseController`:
 
 ```ruby
-include ApiAuthentication::ActsAsBaseControllerWithAuthentication
+include ApiAuthentication::RequestAuthorizeable
 ```
-
-then add to `.env` file `JWT_HMAC_SECRET` variable and assign some value to it
 
 then add the following to your routes.rb file:
 
@@ -62,28 +50,124 @@ It will generate routes like
 
 ```
 Routes for ApiAuthentication::Engine:
-session          PATCH  /session
-                 PUT    /session
-                 POST   /session
-                 DELETE /session
-facebook_session POST   /facebook/session
+    DELETE /push_tokens(.:format)
+    POST   /push_tokens(.:format)
+    POST   /registrations(.:format)
+    DELETE /sessions(.:format)
+    POST   /sessions(.:format)
+    POST   /access_tokens(.:format)
+    POST   /facebook/sessions(.:format)
 ```
 
-### SWAGGER
+# Endpoints usage
 
-Add in SWAGGERED_CLASSES array in api docs controller of project (if swagger gem is used in project)
+## POST /push_tokens
 
-`ApiAuthentication::SWAGGER_CLASSES`
+### headers
 
-And call on array `flatten` method like this
-
-```
-SWAGGERED_CLASSES = [
-    SomeClass,
-    ApiAuthentication::SWAGGER_CLASSES,
-  ].flatten.freeze
+```json
+{
+  "Authorization": "Bearer access_token"
+}
 ```
 
+### parameters
+
+```json
+{
+  "push_token": {
+    "token": "token",
+    "device_type": "android / ios"
+  }
+}
+```
+
+## DELETE /push_tokens
+
+### headers
+```json
+{
+  "Authorization": "Bearer access_token"
+}
+```
+
+### params
+```json
+{
+  "token": "push_token"
+}
+```
+
+## POST /registrations
+### params
+Depends on registration fields array
+```json
+{
+  "user_model_name": {
+    "email": "email",
+    "password": "password"
+  }
+}
+```
+
+## POST /sessions
+### params
+```json
+{
+  "session": {
+    "email": "email",
+    "password": "password"
+  }
+}
+``` 
+### response
+```json
+{
+  "access_token": "jwt token",
+  "refresh_token": "token"
+}
+```
+
+## DELETE /session
+### headers
+```json
+{
+  "Authorization": "Bearer refresh_token"
+}
+```
+
+## POST /access_token
+Refresh access token
+### headers
+```json
+{
+  "Authorization": "Bearer refresh_token"
+}
+```
+### response
+```json
+{
+  "access_token": "jwt token",
+  "refresh_token": "token"
+}
+```
+
+## POST /facebook/sessions
+### params
+```json
+{
+  "session": {
+    "access_token": "facebook access token"
+  }
+}
+``` 
+### response
+```json
+{
+  "access_token": "jwt token",
+  "refresh_token": "token"
+}
+```
 ## About MLSDev
 
 ![MLSdev][logo]

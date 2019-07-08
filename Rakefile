@@ -1,5 +1,7 @@
 #!/usr/bin/env rake
-$LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift File.expand_path('lib', __dir__)
 
 require 'rubygems'
 require 'bundler/setup'
@@ -7,7 +9,7 @@ require 'api_authentication/version'
 require 'rspec/core'
 require 'rspec/core/rake_task'
 
-APP_RAKEFILE = File.expand_path('../spec/dummy/Rakefile', __FILE__)
+APP_RAKEFILE = File.expand_path('spec/dummy/Rakefile', __dir__)
 
 load 'rails/tasks/engine.rake'
 

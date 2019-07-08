@@ -1,17 +1,30 @@
+# frozen_string_literal: true
+
 module ApiAuthentication
   module Generators
     class MigrationsGenerator < Rails::Generators::Base
+      include Rails::Generators::Migration
+      source_root File.expand_path('../templates', __dir__)
 
-      source_root File.expand_path('../../../../db/migrate/', __FILE__)
+      def self.next_migration_number(_path)
+        @time ||= Time.now.utc
+        @calls ||= -1
+        @calls += 1
+        (@time + @calls.seconds).strftime('%Y%m%d%H%M%S')
+      end
 
-      desc "Creates a ApiAuthentication initializer in your application's config/initializers dir"
+      def copy_migration
+        add_migration(:create_api_auth_users, :auth_models)
+        add_migration(:create_api_auth_refresh_tokens, :app_refresh_token_model_class_name)
+        add_migration(:create_api_auth_push_tokens, :app_push_token_model_class_name)
+      end
 
-      def copy_migration_file
-        template '20180129212100_create_users.rb', "db/migrate/#{ 2.seconds.from_now.to_s(:number) }_create_users.rb" unless ActiveRecord::Base.connection.table_exists? ApiAuthentication.configuration.users_table_name
-        template '20180129212121_create_api_authentication_sessions.rb', "db/migrate/#{ 4.seconds.from_now.to_s(:number) }_create_api_authentication_sessions.rb"
-        template '20180129212123_add_created_via_and_provider_to_users.rb', "db/migrate/#{ 6.seconds.from_now.to_s(:number) }_add_created_via_and_provider_to_users.rb"
-        template '20180129213142_add_facebook_id_to_users.rb', "db/migrate/#{ 8.seconds.from_now.to_s(:number) }_add_facebook_id_to_users.rb" if ApiAuthentication.configuration.include_facebook_login
-        template '20180130120441_add_avatar_columns_to_users.rb', "db/migrate/#{ 10.seconds.from_now.to_s(:number) }_add_avatar_columns_to_users.rb" if ApiAuthentication.configuration.add_avatar_fields
+      private
+
+      def add_migration(template, config_field)
+        return if ApiAuthentication.configuration.public_send(config_field).nil?
+
+        migration_template "#{template}.rb.erb", "db/migrate/#{template}.rb"
       end
     end
   end

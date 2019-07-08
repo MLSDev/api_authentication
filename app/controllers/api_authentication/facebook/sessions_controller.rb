@@ -1,15 +1,31 @@
-class ApiAuthentication::Facebook::SessionsController < ApiAuthentication::BaseController
-  skip_before_action :authenticate!, only: :create
+# frozen_string_literal: true
 
-  attr_reader :resource
+module ApiAuthentication
+  module Facebook
+    class SessionsController < BaseController
+      skip_before_action :authenticate!, only: :create
 
-  private
+      attr_reader :resource
 
-  def build_resource
-    @resource = ::ApiAuthentication::Session.social_login.facebook.new resource_params
-  end
+      def create
+        build_resource
+        @resource.call
+        @resource = @resource.tokens
+      end
 
-  def resource_params
-    params.permit(:access_token)
+      private
+
+      def build_resource
+        @resource = ::ApiAuthentication::SocialLogin.new resource_params
+      end
+
+      def resource_params
+        permitted = params.require(:session).permit(:access_token)
+        permitted[:provider] = :facebook
+        permitted[:request] = request
+        permitted[:user_model] = auth_user_model
+        permitted
+      end
+    end
   end
 end

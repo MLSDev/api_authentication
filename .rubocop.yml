@@ -1,0 +1,54 @@
+AllCops:
+  TargetRubyVersion: 2.5.3
+  Excludes:
+    - bin/**/*
+Documentation:
+  Enabled: false
+LineLength:
+  Enabled: true
+  Max: 120
+  Exclude:
+    - spec/dummy/lib/tasks/dummy.rake
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+  Enabled: true
+Style/DotPosition:
+  EnforcedStyle: leading
+  Enabled: true
+Style/FrozenStringLiteralComment:
+  Enabled: true
+Style/HashSyntax:
+  Enabled: true
+  EnforcedStyle: ruby19
+Style/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Style/Lambda:
+  EnforcedStyle: literal
+Layout/EndOfLine:
+  EnforcedStyle: lf
+Metrics/ClassLength:
+  Enabled: true
+  Exclude:
+    - lib/apidocs/**/*
+Metrics/MethodLength:
+  Enabled: true
+  Exclude:
+  - db/migrate/**/*
+  - spec/dummy/db/migrate/**/*
+Metrics/AbcSize:
+  Enabled: true
+  Exclude:
+  - db/migrate/**/*
+  - spec/support/**/*
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+  - spec/**/*
+  - config/routes.rb
+  - lib/apidocs/**/*
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+Style/TrailingCommaInHashLiteral:
+  Enabled: false

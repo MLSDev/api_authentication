@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApiAuthentication
   class Configuration
     include ActiveSupport::Configurable
@@ -8,41 +10,64 @@ module ApiAuthentication
     config_accessor(:controller_to_inherit_from) { 'ActionController::Base' }
 
     #
-    # => Table name of User model, default is `users`
+    # => Enable Registrations endpoint
     #
-    config_accessor(:users_table_name)       { 'users' }
-
-    #
-    # => add fields to users table
-    #
-
-    config_accessor(:add_first_name_field)   { true }
-
-    config_accessor(:add_last_name_field)    { true }
-
-    config_accessor(:add_full_name_field)    { true }
-
-    config_accessor(:add_username_field)     { true }
-
-    config_accessor(:add_birthday_field)     { true }
-
-    config_accessor(:add_avatar_fields)      { true }
-
-    config_accessor(:pull_variables_from_facebook) { ['avatar', 'first_name', 'last_name', 'username', 'full_name', 'birthday'] }
+    config_accessor(:registrations) { true }
 
     #
-    # => add login from sicial_networks
+    # => Enable Push Tokens endpoint
     #
-
-    config_accessor(:include_facebook_login) { true }
+    config_accessor(:push_tokens) { true }
 
     #
-    # => allow to set up in-app class name of user model
+    # => Enable Sessions endpoint
     #
+    config_accessor(:sessions) { true }
 
-    config_accessor(:app_user_model_class_name) { 'User' }
+    #
+    # => add login from social_networks
+    #
+    config_accessor(:facebook_login) { true }
 
-    config_accessor(:handle_users_is_blocked) { false }
+    #
+    # => allow to set up in-app class name of users models
+    #
+    config_accessor(:auth_models) do
+      [
+        {
+          model: 'User',
+          registration_fields: %i[email password first_name last_name username birthday],
+          login_field: :email,
+          push_tokens: true,
+          refresh_tokens: true,
+          social_login: true,
+          facebook_registration_fields: %i[email password first_name last_name username birthday]
+        }
+      ]
+    end
 
+    #
+    # => allow to set up in-app class name of refresh token model
+    #
+    config_accessor(:app_refresh_token_model_class_name) { 'RefreshToken' }
+
+    #
+    # => allow to set up in-app class name of push token model
+    #
+    config_accessor(:app_push_token_model_class_name) { 'PushToken' }
+
+    #
+    # => secret_key
+    #
+    config_accessor(:secret_key) { '<%= SecureRandom.hex(64) %>' }
+
+    #
+    # => JWT token expiration
+    #
+    config_accessor(:jwt_token_exp) { 1.hour }
+
+    config_accessor(:refresh_tokens) { true }
+
+    config_accessor(:refresh_token_exp) { 1.month }
   end
 end

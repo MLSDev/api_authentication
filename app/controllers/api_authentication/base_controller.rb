@@ -1,59 +1,81 @@
-class ApiAuthentication::BaseController < ApiAuthentication::ApplicationController
-  include ApiAuthentication::ActsAsBaseControllerWithAuthentication
+# frozen_string_literal: true
 
-  before_action :authenticate!
+module ApiAuthentication
+  class BaseController < ApplicationController
+    include ApiAuthentication::RequestAuthorizeable
+    protect_from_forgery with: :exception, unless: -> { request.format.json? }
 
-  helper_method :collection, :resource, :parent
+    before_action :authenticate!
 
-  rescue_from ActionController::ParameterMissing do |exception|
-    @exception = exception
+    helper_method :collection, :resource, :parent
 
-    render :exception, status: :unprocessable_entity
-  end
+    rescue_from ApiAuthentication::Errors::Auth::InvalidCredentials,
+                ApiAuthentication::Errors::Token::Missing,
+                ApiAuthentication::Errors::Token::Invalid do |exception|
+      @exception = exception
 
-  rescue_from ActiveRecord::RecordInvalid, ActiveModel::StrictValidationFailed do
-    render :errors, status: :unprocessable_entity
-  end
+      render :exception, status: :unauthorized
+    end
 
-  rescue_from ActiveRecord::RecordNotFound do
-    head :not_found
-  end
+    rescue_from ApiAuthentication::Errors::SocialLogin::NotAllowed,
+                ApiAuthentication::Errors::SocialLogin::FacebookError do |exception|
+      @exception = exception
 
-  def create
-    build_resource
+      render :exception, status: :unprocessable_entity
+    end
 
-    resource.save!
-  end
+    rescue_from ActionController::ParameterMissing do |exception|
+      @exception = exception
 
-  def update
-    resource.update! resource_params
-  end
+      render :exception, status: :unprocessable_entity
+    end
 
-  def destroy
-    resource.destroy
+    rescue_from ActiveRecord::RecordInvalid do |error|
+      @errors = error.record.errors
 
-    head :no_content
-  end
+      render :errors, status: :unprocessable_entity
+    end
 
-  private
+    rescue_from ActiveRecord::RecordNotFound do
+      head :not_found
+    end
 
-  def parent
-    raise NotImplementedError
-  end
+    def create
+      build_resource
 
-  def resource
-    raise NotImplementedError
-  end
+      resource.save!
+    end
 
-  def resource_params
-    raise NotImplementedError
-  end
+    def update
+      resource.update! resource_params
+    end
 
-  def build_resource
-    raise NotImplementedError
-  end
+    def destroy
+      resource.destroy!
 
-  def collection
-    raise NotImplementedError
+      head :no_content
+    end
+
+    private
+
+    def parent
+      raise NotImplementedError
+    end
+
+    def resource
+      raise NotImplementedError
+    end
+
+    def resource_params
+      raise NotImplementedError
+    end
+
+    def build_resource
+      raise NotImplementedError
+    end
+
+    def collection
+      raise NotImplementedError
+    end
   end
 end
