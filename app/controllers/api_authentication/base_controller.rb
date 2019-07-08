@@ -9,6 +9,21 @@ module ApiAuthentication
 
     helper_method :collection, :resource, :parent
 
+    rescue_from ApiAuthentication::Errors::Auth::InvalidCredentials,
+                ApiAuthentication::Errors::Token::Missing,
+                ApiAuthentication::Errors::Token::Invalid do |exception|
+      @exception = exception
+
+      render :exception, status: :unauthorized
+    end
+
+    rescue_from ApiAuthentication::Errors::SocialLogin::NotAllowed,
+                ApiAuthentication::Errors::SocialLogin::FacebookError do |exception|
+      @exception = exception
+
+      render :exception, status: :unprocessable_entity
+    end
+
     rescue_from ActionController::ParameterMissing do |exception|
       @exception = exception
 
