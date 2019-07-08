@@ -3,6 +3,7 @@
 module ApiAuthentication
   class BaseController < ApplicationController
     include ApiAuthentication::RequestAuthorizeable
+    protect_from_forgery with: :exception, unless: -> { request.format.json? }
 
     before_action :authenticate!
 
