@@ -38,6 +38,8 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
 
     helper_method :current_user
 
+    helper_method :current_user_or_nil
+
     helper_method :current_session
 
     protect_from_forgery with: :exception, unless: -> { request.format.json? }
@@ -105,6 +107,11 @@ module ApiAuthentication::ActsAsBaseControllerWithAuthentication
   def current_user
     @current_user ||=
       "::#{ ApiAuthentication.configuration.app_user_model_class_name.constantize }".constantize.find current_user_id
+  end
+
+  def current_user_or_nil
+    user_model = "::#{ApiAuthentication.configuration.app_user_model_class_name.constantize}".constantize
+    @current_user_or_nil ||= user_model.find_by(id: current_user_id)
   end
 
   def current_user_with_only_block_data
