@@ -1,11 +1,6 @@
 language: ruby
 
-sudo: false
-cache: bundler
-
 rvm:
-  - 2.3.0
-  - 2.4.2
   - 2.5.3
   - ruby-head
 
@@ -14,14 +9,9 @@ gemfile:
   - gemfiles/rails_5.1.gemfile
   - gemfiles/rails_5.2.gemfile
 
-matrix:
-  allow_failures:
-    - rvm: ruby-head
-
 before_script:
-  - psql -c 'drop database if exists api_authentication_app_test' -U postgres
-  - psql -c 'create database api_authentication_app_test' -U postgres
-  - gem install bundler --no-document
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
 
 script:
   - RAILS_ENV=test bundle exec rake db:migrate
